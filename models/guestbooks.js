@@ -23,6 +23,14 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.INTEGER,
         allowNull: false,
       },
+      writerId: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+      },
+      name: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
       guestBook: {
         type: DataTypes.STRING,
         allowNull: false,

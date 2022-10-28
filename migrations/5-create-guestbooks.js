@@ -13,6 +13,14 @@ module.exports = {
         type: Sequelize.DataTypes.INTEGER,
         allowNull: false,
       },
+      writerId: {
+        type: Sequelize.DataTypes.INTEGER,
+        allowNull: false,
+      },
+      name: {
+        type: Sequelize.DataTypes.STRING,
+        allowNull: false,
+      },
       guestBook: {
         type: Sequelize.DataTypes.STRING,
         allowNull: false,
