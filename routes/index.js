@@ -1,10 +1,10 @@
 const express = require('express');
 const router = express.Router();
 
-router.use('/users', require('./user.route'));
-router.use('/bests', require('./ilchonpyungs.route'));
-router.use('/diaries', require('./diaries.route'));
-router.use('/comments', require('./comments.route'));
-router.use('/guestbooks', require('./guestBooks.route'));
+// router.use('/users', require('./users.routes'));
+router.use('/bests', require('./ilchonpyungs.routes'));
+// router.use('/diaries', require('./diaries.routes'));
+// router.use('/comments', require('./comments.routes'));
+// router.use('/guestbooks', require('./guestBooks.routes'));
 
 module.exports = router;

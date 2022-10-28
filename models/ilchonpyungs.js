@@ -23,6 +23,10 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.INTEGER,
         allowNull: false,
       },
+      name: {
+        type: DataTypes.STRING,
+        allowNull: true,
+      },
       ilchonpyung: {
         type: DataTypes.STRING,
         allowNull: true,
