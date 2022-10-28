@@ -13,8 +13,8 @@ module.exports = {
         type: Sequelize.DataTypes.INTEGER,
         allowNull: false,
       },
-      writerEmail: {
-        type: Sequelize.DataTypes.STRING,
+      writerId: {
+        type: Sequelize.DataTypes.INTEGER,
         allowNull: false,
       },
       name: {

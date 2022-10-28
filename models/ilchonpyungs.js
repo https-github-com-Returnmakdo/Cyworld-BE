@@ -23,13 +23,13 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.INTEGER,
         allowNull: false,
       },
-      writerEmail: {
-        type: DataTypes.STRING,
+      writerId: {
+        type: DataTypes.INTEGER,
         allowNull: false,
       },
       name: {
         type: DataTypes.STRING,
-        allowNull: true,
+        allowNull: false,
       },
       ilchonpyung: {
         type: DataTypes.STRING,
