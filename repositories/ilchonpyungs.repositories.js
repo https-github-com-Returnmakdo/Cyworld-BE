@@ -19,9 +19,9 @@ class IlchonpyungsRepository {
     return this.Ilchonpyungs.findByPk(ilchonId);
   };
 
-  deleteBest = async (userId, ilchonId) => {
+  deleteBest = async ( userId, ilchonId ) => {
     return this.Ilchonpyungs.destroy({
-      where: { userId, ilchonId },
+      where: { userId, ilchonId  },
     });
   };
 }

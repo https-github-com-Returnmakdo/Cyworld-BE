@@ -5,6 +5,6 @@ const router = express.Router();
 router.use('/bests', require('./ilchonpyungs.routes'));
 // router.use('/diaries', require('./diaries.routes'));
 // router.use('/comments', require('./comments.routes'));
-// router.use('/guestbooks', require('./guestBooks.routes'));
+router.use('/guestbooks', require('./guestBooks.routes'));
 
 module.exports = router;
