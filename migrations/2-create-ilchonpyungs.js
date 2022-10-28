@@ -13,6 +13,10 @@ module.exports = {
         type: Sequelize.DataTypes.INTEGER,
         allowNull: false,
       },
+      writerEmail: {
+        type: Sequelize.DataTypes.STRING,
+        allowNull: false,
+      },
       name: {
         type: Sequelize.DataTypes.STRING,
         allowNull: false,
