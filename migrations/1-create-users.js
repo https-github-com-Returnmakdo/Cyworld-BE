@@ -7,7 +7,7 @@ module.exports = {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER
+        type: Sequelize.DataTypes.INTEGER
       },
       email: {
         type: Sequelize.DataTypes.STRING,
@@ -32,6 +32,21 @@ module.exports = {
       intro: {
         type: Sequelize.DataTypes.STRING,
         allowNull: false,
+      },
+      today: {
+        type: Sequelize.DataTypes.INTEGER,
+        allowNull: false,
+        defaultValue: 0,
+      },
+      total: {
+        type: Sequelize.DataTypes.INTEGER,
+        allowNull: false,
+        defaultValue: 0,
+      },
+      refreshToken:{
+        type: Sequelize.DataTypes.STRING,
+        allowNull: true,
+        defaultValue :""
       },
       createdAt: {
         allowNull: false,

@@ -1,39 +1,59 @@
 const jwt = require('jsonwebtoken');
-const { User } = require('../models');
 require('dotenv').config();
+module.exports = async(req,res,next)=>{
+    try{
+        const {accessToken, refreshToken} = req.headers.auth;
+    
+        if(!accessToken || !refreshToken){
+            throw new InvalidParamsError('로그인 후 사용하세요');
+        }
+        
+        const givemeAccess = accessValidate(accessToken);
+        const givemeRefresh = refreshValidate(refreshToken);
 
-// 유저 인증에 실패하면 403 상태 코드를 반환한다.
-module.exports = async (req, res, next) => {
-  try {
-    const cookies =
-      req.headers.authorization || req.cookies[process.env.COOKIE_NAME];
+        function accessValidate(accessToken){
+            try{
+                jwt.verify(accessToken, process.env.SECRET_KEY);
+                return true;
+            }catch(error){
+                return false;
+            }
+        }
 
-    if (!cookies) {
-      return res.status(403).send({
-        ok: false,
-        errorMessage: '로그인이 필요한 기능입니다.',
-      });
+        function refreshValidate(refreshToken){
+            try{
+                jwt.verify(refreshToken,process.env.SECRET_KEY);
+                return true;
+            }catch(error){
+                return false;
+            }
+        }
+
+        if(!givemeRefresh)
+        return res.status(419).json({'message':'다시 로그인 해주시길 바랍니다'})
+
+        if(!givemeAccess){
+            const{userId} = jwt.verify(refreshToken,process.env.SECRET_KEY);
+
+        const newAccessToken = jwt.sign({userId:userId}, process.env.SECRET_KEY,{expiresIn:'10d'});
+
+        const user = await userSchema.findByPk(userId);
+
+        res.cookie('accessToken',newAccessToken);
+        console.log('토근 재발급');
+
+        res.locals.user=user;
+        
+    }else{
+        const{userId}=jwt.verify(accessToken,process.env.SECRET_KEY);
+        const user = await userSchema.findByPk(userId);
+        res.locals.user =user;
     }
-
-    const [tokenType, tokenValue] = cookies.split(' ');
-    if (tokenType !== 'Bearer') {
-      return res.status(403).send({
-        ok: false,
-        errorMessage: '전달된 쿠키에서 오류가 발생하였습니다.',
-      });
-    }
-
-    const { userId } = jwt.verify(tokenValue, process.env.SECRET_KEY);
-
-    const user = await User.findByPk(userId);
-
-    res.locals.user = user;
     next();
-  } catch (error) {
-    console.trace(error);
-    return res.status(403).send({
-      ok: false,
-      errorMessage: '로그인이 필요한 기능입니다.',
-    });
-  }
+    }catch(error){
+        console.trace(error);
+        return res.status(403).sned({
+            errorMessage : '로그인이 필요합니다.'
+        });
+    }
 };
