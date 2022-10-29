@@ -2,15 +2,16 @@ const express = require('express');
 const router = express.Router();
 const GuestBooksController = require('../controllers/guestBooks.controllers');
 const guestBooksController = new GuestBooksController();
+const auth = require('../middlewares/authMiddlewares');
 
 router
   .route('/:userId/:guestbookId')
-  .put(guestBooksController.updateBook)
-  .delete(guestBooksController.deleteBook);
+  .put(auth, guestBooksController.updateBook)
+  .delete(auth, guestBooksController.deleteBook);
 
 router
   .route('/:userId')
-  .post(guestBooksController.createBook)
+  .post(auth, guestBooksController.createBook)
   .get(guestBooksController.getBooks);
 
 module.exports = router;

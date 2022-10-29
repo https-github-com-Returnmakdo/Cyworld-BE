@@ -1,26 +1,32 @@
-const UsersRepositories = require('../repositories/users.repositories')
-const {Users} = require('../models')
-const jwt = require('jsonwebtoken')
-const bcrypt = require('bcrypt')
+const UsersRepositories = require('../repositories/users.repositories');
+const { Users } = require('../models');
+const jwt = require('jsonwebtoken');
+const bcrypt = require('bcrypt');
 require('dotenv').config();
 
-class UsersService{
-    constructor(){
-        this.usersRepositories = new UsersRepositories();  
-    }
+class UsersService {
+  constructor() {
+    this.usersRepositories = new UsersRepositories();
+  }
 
-createUser = async(users) =>{
-    const{email,name,password,gender,birth} = users;
-    
-    await this.usersRepositories.createUser(email,name,password,gender,birth)
-    }
-emailDuplicates = async(email)=>{
+  createUser = async (users) => {
+    const { email, name, password, gender, birth } = users;
+
+    await this.usersRepositories.createUser(
+      email,
+      name,
+      password,
+      gender,
+      birth
+    );
+  };
+  emailDuplicates = async (email) => {
     return await Users.findOne({
-        where: {email},
-    })
-}
+      where: { email },
+    });
+  };
 
-userLogin = async(email,password)=>{
+  userLogin = async (email, password) => {
     const user = await this.usersRepositories.findOneEmail(email);
     if(!user){
         throw new Error('가입하신 회원이 아닙니다.')
@@ -40,9 +46,6 @@ userLogin = async(email,password)=>{
             process.env.SECRET_KEY,
             {expiresIn : '14d'}
         );
-
-        console.log(accessToken, 'access토큰 확인');
-        console.log(refreshToken, 'refresh토큰 확인');
 
         await this.usersRepositories.updateRefresh(refreshToken,user);
         
