@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-// router.use('/users', require('./users.routes'));
+router.use('/users', require('./users.routes'));
 router.use('/bests', require('./ilchonpyungs.routes'));
 
 router.use('/diaries', require('./diaries.routes'));
