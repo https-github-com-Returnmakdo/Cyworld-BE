@@ -32,7 +32,7 @@ class UsersController {
           errorMessage: '이메일 중복검사를 해주세요.',
         });
       }
-       
+
       if (name.includes(password) || password.includes(name)) {
         return res.status(400).send({
           ok: false,
@@ -91,5 +91,16 @@ class UsersController {
     next(error);
     } 
   }
+  
+  myhome = async (req,res,next)=>{
+    try{  
+      const {userId}=req.params;
+      const myhome= await this.usersService.findOneId(userId)
+      res.status(200).json({data:myhome})
+    }catch(error){
+      next(error);
+    }
+  }
 }
+
 module.exports = UsersController;
