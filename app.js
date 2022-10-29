@@ -28,7 +28,6 @@ app.use('/api', router);
 app.use(express.urlencoded({ extended: false }));
 app.use(errorLogger); // Error Logger
 app.use(errorHandler); // Error Handler
-console.log(process.env.CA_FULL_CHAIN);
 // 운영 환경일때만 적용
 // if (process.env.NODE_ENV == 'production') {
   try {
