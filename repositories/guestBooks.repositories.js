@@ -1,8 +1,9 @@
-const { Guestbooks } = require('../models');
+const { Guestbooks, Users } = require('../models');
 
 class GuestBooksRepository {
   constructor() {
     this.Guestbooks = Guestbooks;
+    this.Users = Users;
   }
 
   createBook = async (book) => {
@@ -31,6 +32,10 @@ class GuestBooksRepository {
     await this.Guestbooks.destroy({
       where: { guestbookId },
     });
+  };
+
+  findByUser = async (userId) => {
+    return this.Users.findByPk(userId);
   };
 }
 
