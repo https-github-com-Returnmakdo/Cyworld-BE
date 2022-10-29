@@ -1,30 +1,27 @@
 const UsersRepositories = require('../repositories/users.repositories');
-const { Users } = require('../models');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 require('dotenv').config();
 
 class UsersService {
-  constructor() {
-    this.usersRepositories = new UsersRepositories();
-  }
+ 
+    usersRepositories = new UsersRepositories();
 
   createUser = async (users) => {
     const { email, name, password, gender, birth } = users;
 
-    await this.usersRepositories.createUser(
-      email,
-      name,
-      password,
-      gender,
-      birth
-    );
-  };
-  emailDuplicates = async (email) => {
-    return await Users.findOne({
-      where: { email },
+    await this.usersRepositories.createUser({
+      email:email +"@cyworld.com",
+      name:name,
+      password:password,
+      gender:gender,
+      birth:birth,
     });
   };
+  
+  emailDuplicates = async (email)=>{
+    return await this.usersRepositories.findOneEmail({email : email +"@cyworld.com"});
+  }
 
   userLogin = async (email, password) => {
     const user = await this.usersRepositories.findOneEmail(email);
@@ -46,19 +43,20 @@ class UsersService {
             process.env.SECRET_KEY,
             {expiresIn : '14d'}
         );
-
         await this.usersRepositories.updateRefresh(refreshToken,user);
-        
         return {accessToken,refreshToken};
-};
-}
+  };
 
-check =async(email)=>{
-    const emailCheck = await this.usersRepositories.findOneEmail(email);
-    if(emailCheck){
-        throw new Error('이미 가입된 회원입니다')
-    }
+  // findOneId =async(userId)=>{
+  //   const findOneId = await this.usersRepositories.findOneId(userId)
+  //     return{
+  //         email:findOneId.email,
+  //         name:findOneId.name,
+  //         gender:findOneId.gender,
+  //         birth:findOneId.birth,
+  //         intro:findOneId.intro,
+  //   }
+  // }
 }
-
 
 module.exports = UsersService;
