@@ -72,6 +72,16 @@ class UsersController {
       next(error);
     }
   };
+
+  emailCheck = async (req, res, next) => {
+    try {
+      const { email } = req.params;
+      await usersService.check(email);
+      res.status(200).json({ message: '이메일 인증 완료되었습니다' });
+    } catch (error) {
+      next(error);
+    }
+  };
 }
 
 module.exports = UsersController;
