@@ -1,28 +1,9 @@
 const UsersService = require('../services/users.services');
 const Joi = require('../util/joi');
 const bcrypt = require('bcrypt');
-const { ServiceDiscovery } = require('aws-sdk');
 
-class UsersController{
-    usersService = new UsersService();
-    
-    //회원가입
-    signup = async(req,res,next)=>{
-        try{
-            const {email,name,password,confirm,gender,birth} =
-            await Joi.signupSchema.validateAsync(req.body);
-    
-            if(!email || !name || !password || !confirm || !gender || !birth){
-                return res.status(400).send({
-                    ok: false, errorMessage : '형식을 확인해주세요.'
-                });
-            }
-            
-            if(gender ==="남자")
-                {res.send('')}
-            
-            if(gender ==="여자")
-                {res.send('')}
+class UsersController {
+  usersService = new UsersService();
 
   //회원가입
   signup = async (req, res, next) => {
@@ -72,34 +53,35 @@ class UsersController{
     } catch (error) {
       next(error);
     }
-    //로그인
-    login = async(req,res,next)=>{
-        try {
-            const {email, password}=await Joi.loginSchema.validateAsync(req.body);
-            const user = await this.usersService.userLogin(email,password);
-            res.cookie('accessToken',user.accessToken);
-            res.cookie('refreshToken',user.refreshToken);
-            res.status(200).json({
-                email: user.email,
-                userId : user.userId,
-                accessToken : user.accessToken,
-                refreshToken:user.refreshToken,
-                message:'로그인에 성공하였습니다',
-            });
-        }catch(error){
-        next(error);  
-        }
-    };
-
-    emailCheck = async(req,res,next)=>{
-        try{
-            const {email} = req.params;
-            await usersService.check(email);
-            res.status(200).json({message:'이메일 인증 완료되었습니다'})
-        }catch(error){
-            next(error);
-        }
+  };
+  //로그인
+  login = async (req, res, next) => {
+    try {
+      const { email, password } = await Joi.loginSchema.validateAsync(req.body);
+      const user = await this.usersService.userLogin(email, password);
+      res.cookie('accessToken', user.accessToken);
+      res.cookie('refreshToken', user.refreshToken);
+      res.status(200).json({
+        email: user.email,
+        userId: user.userId,
+        accessToken: user.accessToken,
+        refreshToken: user.refreshToken,
+        message: '로그인에 성공하였습니다',
+      });
+    } catch (error) {
+      next(error);
     }
+  };
+
+  emailCheck = async (req, res, next) => {
+    try {
+      const { email } = req.params;
+      await usersService.check(email);
+      res.status(200).json({ message: '이메일 인증 완료되었습니다' });
+    } catch (error) {
+      next(error);
+    }
+  };
 }
 
-module.exports = UsersController
+module.exports = UsersController;
