@@ -3,7 +3,13 @@ const {Op} = require('sequelize')
 class UsersRepositories{
 
     createUser = async(email,name,password,gender,birth)=>{
-        const createUser = await Users.create({email,name,password,gender,birth});
+        const createUser = await Users.create(
+            email,
+            name,
+            password,
+            gender,
+            birth
+            );
     return createUser;
     }
 
@@ -29,6 +35,5 @@ class UsersRepositories{
     updateRefresh = async (refreshToken, user) => {
         await Users.update({ refreshToken }, { where: { userId: user.userId } });
     };
-
 }
 module.exports = UsersRepositories;
