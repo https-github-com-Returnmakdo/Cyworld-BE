@@ -29,7 +29,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(errorLogger); // Error Logger
 app.use(errorHandler); // Error Handler
 // 운영 환경일때만 적용
-// if (process.env.NODE_ENV == 'production') {
+if (process.env.NODE_ENV == 'production') {
   try {
     const option = {
       ca: fs.readFileSync(process.env.CA_FULL_CHAIN),
@@ -44,11 +44,10 @@ app.use(errorHandler); // Error Handler
     console.log('HTTPS 서버가 실행되지 않습니다.');
     console.log(error);
   }
-// }
-//  else {
-//   app.listen(port, () => {
-//     console.log('HTTP 서버가 실행되었습니다. 포트 :: ' + port);
-//   });
-// }
+} else {
+  app.listen(port, () => {
+    console.log('HTTP 서버가 실행되었습니다. 포트 :: ' + port);
+  });
+}
 
 module.exports = https;
