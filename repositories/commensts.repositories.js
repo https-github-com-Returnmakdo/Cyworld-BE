@@ -20,8 +20,8 @@ class CommentRepository {
 
   updateComment = async (commentId, userId, comment) => {
     const updateCommentData = await Comments.update(
-      { where: { commentId, userId } },
-      { comment: comment }
+      { comment: comment },
+      { where: { commentId, userId } }
     );
     return updateCommentData;
   };

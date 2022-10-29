@@ -29,7 +29,7 @@ module.exports = (sequelize, DataTypes) => {
       },
       dirImg: {
         type: DataTypes.STRING,
-        allowNull: false,
+        allowNull: true,
       },
       diaryNo: {
         type: DataTypes.INTEGER,

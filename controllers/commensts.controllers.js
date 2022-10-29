@@ -11,8 +11,9 @@ class CommentController {
 
   createComment = async (req, res) => {
     const { diaryId } = req.params;
-    const { userId } = res.locals.userId;
+    const { userId } = res.locals.user;
     const { comment } = req.body;
+    console.log(res.locals.user);
 
     const createCommentData = await this.commentController.createComment(
       diaryId,
@@ -24,7 +25,7 @@ class CommentController {
 
   updataComment = async (req, res) => {
     const { commentId } = req.params;
-    const { userId } = res.locals.userId;
+    const { userId } = res.locals.user;
     const { comment } = req.body;
 
     const updateCommentData = await this.commentController.updateComment(
@@ -37,7 +38,7 @@ class CommentController {
 
   deleteComment = async (req, res) => {
     const { commentId } = req.params;
-    const { userId } = res.locals.userId;
+    const { userId } = res.locals.user;
 
     const deleteCommentData = await this.commentController.deleteComment(
       commentId,
