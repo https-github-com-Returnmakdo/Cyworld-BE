@@ -1,5 +1,8 @@
 module.exports = (req, res, next) => {
   try {
+    if (!req.header.auth) {
+      return next();
+    }
     const { accessToken, refreshToken } = req.headers.auth || req.cookies;
 
     if (accessToken || refreshToken) {
