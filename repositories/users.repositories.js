@@ -14,11 +14,11 @@ class UsersRepositories{
     }
 
     findOneId = async(userId)=>{
-        const findOneId = await Users.findOne({Where :{userId}});
+        const findOneId = await Users.findOne({where :{userId}});
         return findOneId
     }
 
-    findOneEmail = async(email)=>{
+    findOneEmail = async({email})=>{
        const findOneEmail=await Users.findOne({where:{email}})
         return findOneEmail;
     }

@@ -24,7 +24,7 @@ class UsersService {
   }
 
   userLogin = async (email, password) => {
-    const user = await this.usersRepositories.findOneEmail(email);
+    const user = await this.usersRepositories.findOneEmail({email});
     if(!user){
         throw new Error('가입하신 회원이 아닙니다.')
         }
@@ -47,16 +47,21 @@ class UsersService {
         return {accessToken,refreshToken};
   };
 
-  // findOneId =async(userId)=>{
-  //   const findOneId = await this.usersRepositories.findOneId(userId)
-  //     return{
-  //         email:findOneId.email,
-  //         name:findOneId.name,
-  //         gender:findOneId.gender,
-  //         birth:findOneId.birth,
-  //         intro:findOneId.intro,
-  //   }
-  // }
+  findOneId = async(userId)=>{
+    const findOneId = await this.usersRepositories.findOneId(userId)
+    console.log('111111111',findOneId)
+      return{
+          userId:findOneId.userId,
+          email:findOneId.email,
+          name:findOneId.name,
+          gender:findOneId.gender,
+          birth:findOneId.birth,
+          intro:findOneId.intro,
+          today:findOneId.today,
+          total:findOneId.total,
+          
+    }
+  }
 }
 
 module.exports = UsersService;
