@@ -23,17 +23,13 @@ emailDuplicates = async(email)=>{
 userLogin = async(email,password)=>{
     const user = await this.usersRepositories.findOneEmail(email);
     if(!user){
-        res.status(400).send({
-            ok: false, errorMessage : '가입하신 회원이 아닙니다.'
-        })
-    }
+        throw new Error('가입하신 회원이 아닙니다.')
+        }
+    
     const isEqual = await bcrypt.compare(password,user.password);
     if(!isEqual){
-        res.status(400).send({
-            ok: false, errorMessage : '비밀번호가 다릅니다.'
-        })
-    }
-    
+        throw new Error('비밀번호가 다릅니다.')
+        }
     const accessToken =jwt.sign(
         {userId :user.userId},
         process.env.SECRET_KEY,
@@ -52,6 +48,14 @@ userLogin = async(email,password)=>{
         
         return {accessToken,refreshToken};
 };
-
 }
+
+check =async(email)=>{
+    const emailCheck = await this.usersRepositories.findOneEmail(email);
+    if(emailCheck){
+        throw new Error('이미 가입된 회원입니다')
+    }
+}
+
+
 module.exports = UsersService;

@@ -1,6 +1,7 @@
 const UsersService = require('../services/users.services')
 const Joi = require('../util/joi');
 const bcrypt = require('bcrypt');
+const { ServiceDiscovery } = require('aws-sdk');
 
 class UsersController{
     usersService = new UsersService();
@@ -17,6 +18,11 @@ class UsersController{
                 });
             }
             
+            if(gender ==="남자")
+                {res.send('')}
+            
+            if(gender ==="여자")
+                {res.send('')}
 
             if(password !== confirm){
                 return res.status(400).send({
@@ -63,6 +69,16 @@ class UsersController{
         next(error);  
         }
     };
+
+    emailCheck = async(req,res,next)=>{
+        try{
+            const {email} = req.params;
+            await usersService.check(email);
+            res.status(200).json({message:'이메일 인증 완료되었습니다'})
+        }catch(error){
+            next(error);
+        }
+    }
 }
 
 module.exports = UsersController
