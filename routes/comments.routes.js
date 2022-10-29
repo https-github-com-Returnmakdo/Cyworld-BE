@@ -7,7 +7,15 @@ const commentController = new CommentController();
 
 router.get('/:diaryId', commentController.getComment);
 router.post('/:diaryId', authMiddleware, commentController.createComment);
-router.put('/:commentId', authMiddleware, commentController.updataComment);
-router.delete('/:commentId', authMiddleware, commentController.deleteComment);
+router.put(
+  '/:diaryId/:commentId',
+  authMiddleware,
+  commentController.updataComment
+);
+router.delete(
+  '/:diaryId/:commentId',
+  authMiddleware,
+  commentController.deleteComment
+);
 
 module.exports = router;

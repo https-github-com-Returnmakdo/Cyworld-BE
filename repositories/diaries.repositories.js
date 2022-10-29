@@ -18,8 +18,8 @@ class DiaryRepository {
 
   updateDiary = async (diaryId, userId, content) => {
     const updateDiaryData = await Diaries.update(
-      { where: { diaryId, userId } },
-      { content }
+      { content: content },
+      { where: { diaryId, userId } }
     );
     return updateDiaryData;
   };

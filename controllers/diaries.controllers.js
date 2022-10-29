@@ -23,7 +23,7 @@ class DiaryController {
   };
 
   updateDiary = async (req, res) => {
-    const { userId, diaryId } = req.params;
+    const { diaryId, userId } = req.params;
     const { content } = req.body;
 
     const updateDiaryData = await this.diaryController.updateDiary(
