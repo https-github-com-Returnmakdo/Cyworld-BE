@@ -11,23 +11,23 @@ module.exports = {
       },
       email: {
         type: Sequelize.DataTypes.STRING,
-        allowNull: false,
+        allowNull: true,
       },
       name: {
         type: Sequelize.DataTypes.STRING,
-        allowNull: false,
+        allowNull: true,
       },
       password: {
         type: Sequelize.DataTypes.STRING,
-        allowNull: false,
+        allowNull: true,
       },
       gender: {
         type: Sequelize.DataTypes.STRING,
-        allowNull: false,
+        allowNull: true,
       },
       birth: {
         type: Sequelize.DataTypes.STRING,
-        allowNull: false,
+        allowNull: true,
       },
       intro: {
         type: Sequelize.DataTypes.STRING,
@@ -48,6 +48,14 @@ module.exports = {
         type: Sequelize.DataTypes.STRING,
         allowNull: true,
         defaultValue: '',
+      },
+      snsId:{
+        type:Sequelize.DataTypes.STRING,
+        allowNull:true,
+      },
+      provider: {
+        type: Sequelize.DataTypes.STRING,
+        allowNull:true,
       },
       createdAt: {
         allowNull: false,
