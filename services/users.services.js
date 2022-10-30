@@ -24,6 +24,12 @@ class UsersService {
     });
   };
 
+  duplicate = async(email)=>{
+    return await this.usersRepositories.findOneEmail({
+      email
+    })
+  }
+
   userLogin = async (email, password) => {
     const user = await this.usersRepositories.findOneEmail({ email });
     if (!user) {
@@ -122,6 +128,14 @@ class UsersService {
     const { userId } = req.params;
     return await this.usersRepositories.findByUser(userId);
   };
-}
 
+
+  introupdate = async(userId,intro)=>{
+    const introupdate = await this.usersRepositories.introUpdate(userId,intro)
+    return {
+      userId : introupdate.userId,
+      intro : introupdate.intro
+    }
+  }
+}
 module.exports = UsersService;
