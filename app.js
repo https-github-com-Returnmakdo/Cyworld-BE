@@ -12,13 +12,30 @@ const {
 } = require('./middlewares/error-hander.middleware');
 //
 const cookieParser = require('cookie-parser');
-
+const session = require('cookie-session');
+const passport =require('passport');
+const passportConfig = require('./passport');
+passportConfig();
 const app = express();
 const https = HTTPS.createServer(app);
 const router = require('./routes');
 const port = process.env.EXPRESS_PORT || 3000;
 
 // middlewares
+
+app.use(
+  session({
+    resave : false,
+    saveUninitialized:false,
+    secret: [process.env.KAKAO_SECRET,process.env.GOOGLE_SECRET],
+    cookie :{
+      httpOnly:true,
+      secure : false,
+    },
+  })
+  )
+app.use(passport.initialize());
+app.use(passport.session());
 app.use(cors());
 app.use(cookieParser());
 app.use(helmet());
