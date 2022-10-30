@@ -21,33 +21,44 @@ module.exports = (sequelize, DataTypes) => {
       },
       email: {
         type: DataTypes.STRING,
-        allowNull: false,
+        allowNull: true,
       },
       name: {
         type: DataTypes.STRING,
-        allowNull: false,
+        allowNull: true,
       },
       password: {
         type: DataTypes.STRING,
-        allowNull: false,
+        allowNull: true,
       },
       gender: {
         type: DataTypes.STRING,
-        allowNull: false,
+        allowNull: true,
       },
       birth: {
         type: DataTypes.STRING,
-        allowNull: false,
+        allowNull: true,
       },
       intro: {
         type: DataTypes.STRING,
         allowNull: false,
         defaultValue: 'default',
       },
-      refreshToken:{
-        type:DataTypes.STRING,
-        
-      }
+      today: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        defaultValue: 0,
+      },
+      total: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        defaultValue: 0,
+      },
+      refreshToken: {
+        type: DataTypes.STRING,
+      },
+      snsId: DataTypes.STRING,
+      provider: DataTypes.STRING,
     },
     {
       sequelize,

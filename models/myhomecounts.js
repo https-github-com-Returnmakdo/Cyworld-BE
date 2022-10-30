@@ -33,17 +33,16 @@ module.exports = (sequelize, DataTypes) => {
       },
       createdAt: {
         allowNull: false,
-        type: DataTypes.STRING,
+        type: DataTypes.DATE,
       },
       updatedAt: {
         allowNull: false,
-        type: DataTypes.STRING,
+        type: DataTypes.DATE,
       },
     },
     {
       sequelize,
       modelName: 'MyHomeCounts',
-      timestamps: false,
     }
   );
   return MyHomeCounts;

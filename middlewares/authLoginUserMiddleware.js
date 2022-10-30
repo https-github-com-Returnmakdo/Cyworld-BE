@@ -3,7 +3,7 @@ module.exports = (req, res, next) => {
     if (!req.header.auth) {
       return next();
     }
-    const { accessToken, refreshToken } = req.headers.auth || req.cookes;
+    const { accessToken, refreshToken } = req.headers.auth || req.cookies;
 
     if (accessToken || refreshToken) {
       return res.status(403).send({
