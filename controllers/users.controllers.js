@@ -24,7 +24,7 @@ class UsersController {
           errorMessage: '비밀번호가 일치하지 않습니다.',
         });
       }
-      
+
       const emailcheck = await this.usersService.emailDuplicates(email);
       if (emailcheck) {
         return res.status(400).send({
@@ -76,31 +76,55 @@ class UsersController {
 
   //이메일 중복
   emailCheck = async (req, res, next) => {
-    try{
-      const {email}=req.body
-      console.log(email)
-      const emailCheck = await this.usersService.emailDuplicates(email)
-      console.log(emailCheck)
-      if (emailCheck){
-        throw new Error('이미 등록된 사용자입니다.')
+    try {
+      const { email } = req.body;
+      console.log(email);
+      const emailCheck = await this.usersService.emailDuplicates(email);
+      console.log(emailCheck);
+      if (emailCheck) {
+        throw new Error('이미 등록된 사용자입니다.');
       }
-      if (!emailCheck){
-        res.status(200).json({message:"사용 가능한 이메일입니다."})
-    }
-  }catch(error){
-    next(error);
-    } 
-  }
-  
-  myhome = async (req,res,next)=>{
-    try{  
-      const {userId}=req.params;
-      const myhome= await this.usersService.findOneId(userId)
-      res.status(200).json({data:myhome})
-    }catch(error){
+      if (!emailCheck) {
+        res.status(200).json({ message: '사용 가능한 이메일입니다.' });
+      }
+    } catch (error) {
       next(error);
     }
-  }
+  };
+
+  surfing = async (req, res, next) => {
+    try {
+      const result = await this.usersService.surfing();
+
+      res.status(200).send({ data: result.userId });
+    } catch (error) {
+      res
+        .status(error.status || 400)
+        .send({ ok: false, message: error.message });
+    }
+  };
+
+  myhome = async (req, res, next) => {
+    try {
+      await this.usersService.todayTotal(req, res);
+      const result = await this.usersService.myhome(req, res);
+      res.status(200).send({ data: result });
+    } catch (error) {
+      res
+        .status(error.status || 400)
+        .send({ ok: false, message: error.message });
+    }
+  };
+
+  // myhome = async (req, res, next) => {
+  //   try {
+  //     const { userId } = req.params;
+  //     const myhome = await this.usersService.findOneId(userId);
+  //     res.status(200).json({ data: myhome });
+  //   } catch (error) {
+  //     next(error);
+  //   }
+  // };
 }
 
 module.exports = UsersController;
