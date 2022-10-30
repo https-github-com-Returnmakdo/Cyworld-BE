@@ -1,4 +1,5 @@
 const DiaryRepository = require('../repositories/diaries.repositories');
+require('dotenv').config();
 
 class DiaryService {
   diaryService = new DiaryRepository();
@@ -17,6 +18,7 @@ class DiaryService {
       return {
         diaryId: diary.diaryId,
         userId: diary.userId,
+        dirImg: diary.dirImg,
         content: diary.content,
         diaryNo: diary.diaryNo,
         createdAt: diary.createdAt,
@@ -25,9 +27,10 @@ class DiaryService {
     });
   };
 
-  createDiary = async (userId, content, diaryNo) => {
+  createDiary = async (userId, dirImg, content, diaryNo) => {
     const createDiaryData = await this.diaryService.createDiary(
       userId,
+      dirImg,
       content,
       diaryNo
     );
@@ -35,22 +38,25 @@ class DiaryService {
     return {
       diaryId: createDiaryData.diaryId,
       userId: createDiaryData.userId,
+      dirImg: createDiaryData.dirImg,
       content: createDiaryData.content,
       diaryNo: createDiaryData.diaryNo,
       createdAt: createDiaryData.createdAt,
     };
   };
 
-  updateDiary = async (diaryId, userId, content) => {
+  updateDiary = async (diaryId, userId, dirImg, content) => {
     const updateDiaryData = await this.diaryService.updateDiary(
       diaryId,
       userId,
+      dirImg,
       content
     );
 
     return {
       diaryId: updateDiaryData.diaryId,
       userId: updateDiaryData.userId,
+      dirImg: updateDiaryData.dirImg,
       content: updateDiaryData.content,
       diaryNo: updateDiaryData.diaryNo,
       createdAt: updateDiaryData.createdAt,
