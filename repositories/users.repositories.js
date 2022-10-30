@@ -65,5 +65,13 @@ class UsersRepositories {
     await Users.increment({ total: 1 }, { where: { userId } });
     await Users.update({ today: 1 }, { where: { userId } });
   };
+
+  introUpdate = async(userId,intro)=>{
+    const introupdate =  await Users.update(
+        {intro:intro},
+        {where: {userId}}
+    )
+    return introupdate;
+  }
 }
 module.exports = UsersRepositories;
