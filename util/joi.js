@@ -3,7 +3,8 @@ const birthRegEx = /^(19[0-9][0-9]|20\d{2})-(0[0-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3
 module.exports = {
   signupSchema: Joi.object({
     email: Joi.string()
-      .email({ minDomainSegments: 2, tlds: { allow: ['com', 'net'] } })
+      // .email({ minDomainSegments: 2, tlds: { allow: ['com', 'net'] } })
+      .alphanum()
       .required()
       .error(new Error('이메일 형식이 올바르지 않습니다.')),
     name: Joi.string()
