@@ -44,10 +44,19 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
         defaultValue: 'default',
       },
-      refreshToken:{
-        type:DataTypes.STRING,
-        
-      }
+      today: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        defaultValue: 0,
+      },
+      total: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        defaultValue: 0,
+      },
+      refreshToken: {
+        type: DataTypes.STRING,
+      },
     },
     {
       sequelize,
