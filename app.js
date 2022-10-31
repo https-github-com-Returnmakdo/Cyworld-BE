@@ -13,30 +13,33 @@ const {
 //
 const cookieParser = require('cookie-parser');
 const session = require('cookie-session');
-const passport =require('passport');
+const passport = require('passport');
 const passportConfig = require('./passport');
 passportConfig();
 const app = express();
 const https = HTTPS.createServer(app);
 const router = require('./routes');
 const port = process.env.EXPRESS_PORT || 3000;
+let corsOptions = {
+  origin: ['http://localhost:3000', 'https://cyworld-client.vercel.app'],
+  credentials: true,
+};
 
 // middlewares
-
 app.use(
   session({
-    resave : false,
-    saveUninitialized:false,
-    secret: [process.env.KAKAO_SECRET,process.env.GOOGLE_SECRET],
-    cookie :{
-      httpOnly:true,
-      secure : false,
+    resave: false,
+    saveUninitialized: false,
+    secret: [process.env.KAKAO_SECRET, process.env.GOOGLE_SECRET],
+    cookie: {
+      httpOnly: true,
+      secure: false,
     },
   })
-  )
+);
 app.use(passport.initialize());
 app.use(passport.session());
-app.use(cors());
+app.use(cors(corsOptions));
 app.use(cookieParser());
 app.use(helmet());
 app.use(morgan('tiny'));
