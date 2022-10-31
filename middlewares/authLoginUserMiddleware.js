@@ -2,8 +2,6 @@ module.exports = (req, res, next) => {
   try {
     const { accessToken, refreshToken } =
       req.headers.authorization || req.cookies;
-    console.log(req.headers.authorization);
-    console.log(req.headers);
     if (accessToken || refreshToken) {
       return res.status(403).send({
         errorMessage: '이미 로그인이 되어있습니다.',
