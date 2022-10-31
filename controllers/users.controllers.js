@@ -59,6 +59,7 @@ class UsersController {
   //로그인
   login = async (req, res, next) => {
     try {
+      console.log(req.body);
       const { email, password } = await Joi.loginSchema.validateAsync(req.body);
       const { accessToken, refreshToken } = await this.usersService.userLogin(
         email,
@@ -76,7 +77,7 @@ class UsersController {
       res
         .status(200)
         .set({
-          Authorization: 'Bearer ' + accessToken,
+          accessToken: 'Bearer ' + accessToken,
           refreshToken,
         })
         .json({ msg: '로그인 되었습니다.' });
