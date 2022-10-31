@@ -6,8 +6,17 @@ module.exports = {
   myHomeCountSchedule: async () => {
     try {
       schedule.scheduleJob('*/1 * * * *', async () => {
-        const users = await Users.findAll();
-        await users.update({ today: 0 }, { where: { userId: users.userId } });
+        const allUsers = await Users.findAll();
+        const userIds = allUsers.map((ids) => ids.userId);
+
+        await Users.update(
+          { today: 0 },
+          {
+            where: {
+              userId: userIds,
+            },
+          }
+        );
       });
     } catch (err) {
       logger.error(err);

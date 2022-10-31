@@ -12,7 +12,7 @@ const {
   errorHandler,
   errorLogger,
 } = require('./middlewares/error-hander.middleware');
-// const { myHomeCountSchedule } = require('./util/setSchedule');
+const { myHomeCountSchedule } = require('./util/setSchedule');
 
 //
 const cookieParser = require('cookie-parser');
@@ -29,7 +29,7 @@ let corsOptions = {
   credentials: true,
 };
 
-// myHomeCountSchedule();
+myHomeCountSchedule();
 
 // middlewares
 app.use(
