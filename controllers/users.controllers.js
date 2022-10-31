@@ -8,6 +8,7 @@ class UsersController {
   //회원가입
   signup = async (req, res, next) => {
     try {
+      console.log(req.body);
       const { email, name, password, confirm, gender, birth } =
         await Joi.signupSchema.validateAsync(req.body);
 
@@ -77,18 +78,12 @@ class UsersController {
   //이메일 중복
   emailCheck = async (req, res, next) => {
     try {
-      let { email } = req.body;
-      console.log('11111', email);
-      email = email + '@cyworld.com';
+      const { email } = req.body;
       const emailCheck = await this.usersService.duplicate(email);
-      console.log('222222', email);
-      console.log(emailCheck);
       if (emailCheck) {
         throw new Error('이미 등록된 사용자입니다.');
       }
-      if (!emailCheck) {
-        res.status(200).json({ msg: '사용 가능한 이메일입니다.' });
-      }
+      res.status(200).send({ mst: '사용가능한 이메일입니다.' });
     } catch (error) {
       next(error);
     }
