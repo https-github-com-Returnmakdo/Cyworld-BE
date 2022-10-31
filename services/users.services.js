@@ -56,7 +56,7 @@ class UsersService {
       { expiresIn: '14d' }
     );
     await this.usersRepositories.updateRefresh(refreshToken, user);
-    return { accessToken, refreshToken };
+    return { accessToken, refreshToken, userId: user.userId };
   };
 
   findOneId = async (userId) => {
