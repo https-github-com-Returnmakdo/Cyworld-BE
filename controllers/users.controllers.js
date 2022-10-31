@@ -59,6 +59,7 @@ class UsersController {
   //로그인
   login = async (req, res, next) => {
     try {
+      console.log(req.body);
       const { email, password } = await Joi.loginSchema.validateAsync(req.body);
       const user = await this.usersService.userLogin(email, password);
       res.cookie('accessToken', user.accessToken);
@@ -79,11 +80,11 @@ class UsersController {
   emailCheck = async (req, res, next) => {
     try {
       const { email } = req.body;
-      const emailCheck = await this.usersService.duplicate(email);
+      const emailCheck = await this.usersService.emailDuplicates(email);
       if (emailCheck) {
         throw new Error('이미 등록된 사용자입니다.');
       }
-      res.status(200).send({ mst: '사용가능한 이메일입니다.' });
+      res.status(200).send({ msg: '사용가능한 이메일입니다.' });
     } catch (error) {
       next(error);
     }
