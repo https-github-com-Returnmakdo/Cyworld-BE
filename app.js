@@ -3,45 +3,55 @@ require('dotenv').config();
 const fs = require('fs');
 const HTTPS = require('https');
 const express = require('express');
+const hpp = require('hpp');
 const cors = require('cors');
+const { stream } = require('./util/logger');
 const helmet = require('helmet');
 const morgan = require('morgan');
 const {
   errorHandler,
   errorLogger,
 } = require('./middlewares/error-hander.middleware');
+// const { myHomeCountSchedule } = require('./util/setSchedule');
+
 //
 const cookieParser = require('cookie-parser');
 const session = require('cookie-session');
-const passport =require('passport');
+const passport = require('passport');
 const passportConfig = require('./passport');
 passportConfig();
 const app = express();
 const https = HTTPS.createServer(app);
 const router = require('./routes');
 const port = process.env.EXPRESS_PORT || 3000;
+let corsOptions = {
+  origin: ['http://localhost:3000', 'https://cyworld-client.vercel.app'],
+  credentials: true,
+};
+
+// myHomeCountSchedule();
 
 // middlewares
-
 app.use(
   session({
-    resave : false,
-    saveUninitialized:false,
-    secret: [process.env.KAKAO_SECRET,process.env.GOOGLE_SECRET],
-    cookie :{
-      httpOnly:true,
-      secure : false,
+    resave: false,
+    saveUninitialized: false,
+    secret: [process.env.KAKAO_SECRET, process.env.GOOGLE_SECRET],
+    cookie: {
+      httpOnly: true,
+      secure: false,
     },
   })
-  )
+);
 app.use(passport.initialize());
 app.use(passport.session());
-app.use(cors());
+app.use(cors(corsOptions));
 app.use(cookieParser());
 app.use(helmet());
-app.use(morgan('tiny'));
+app.use(morgan('combined', { stream }));
 app.use(express.json());
 app.use('/api', router);
+app.use(hpp());
 app.use(express.urlencoded({ extended: false }));
 app.use(errorLogger); // Error Logger
 app.use(errorHandler); // Error Handler

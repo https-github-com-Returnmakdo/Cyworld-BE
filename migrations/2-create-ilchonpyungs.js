@@ -27,6 +27,10 @@ module.exports = {
         type: Sequelize.DataTypes.STRING,
         allowNull: false,
       },
+      nick: {
+        type: Sequelize.DataTypes.STRING,
+        allowNull: false,
+      },
       ilchonpyung: {
         type: Sequelize.DataTypes.STRING,
         allowNull: false,

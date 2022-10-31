@@ -109,16 +109,16 @@ class UsersService {
       });
     // 이전 조회수 업데이트 날짜와 현재 날짜가 다를경우 today는 1로 초기화, total +1
     // 구현되는 것을 확인하기 위해 1분마다 today 초기화
-    const day = new Date() + '';
-    const myhomeDay = existIp.updatedAt + '';
-    const intervalDay = day.split(':')[1] - myhomeDay.split(':')[1] === 0;
+    // const day = new Date() + '';
+    // const myhomeDay = existIp.updatedAt + '';
+    // const intervalDay = day.split(':')[1] - myhomeDay.split(':')[1] === 0;
 
-    if (!intervalDay)
-      return await this.usersRepositories.newTodayTotal({
-        ip: ipAdress,
-        time,
-        userId,
-      });
+    // if (!intervalDay)
+    //   return await this.usersRepositories.newTodayTotal({
+    //     ip: ipAdress,
+    //     time,
+    //     userId,
+    //   });
 
     // 조회수를 무작정 올리는것을 방지하기 위한 5초 간격
     const intervalCount = time.toString() - existIp.time > 5000;
