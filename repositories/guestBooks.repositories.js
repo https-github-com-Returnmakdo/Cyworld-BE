@@ -7,7 +7,7 @@ class GuestBooksRepository {
   }
 
   createBook = async (book) => {
-    return await this.Guestbooks.create(book);
+    await this.Guestbooks.create(book);
   };
 
   getBooks = async (userId) => {

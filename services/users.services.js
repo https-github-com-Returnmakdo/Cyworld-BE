@@ -24,11 +24,11 @@ class UsersService {
     });
   };
 
-  duplicate = async(email)=>{
+  duplicate = async (email) => {
     return await this.usersRepositories.findOneEmail({
-      email
-    })
-  }
+      email,
+    });
+  };
 
   userLogin = async (email, password) => {
     const user = await this.usersRepositories.findOneEmail({ email });
@@ -83,6 +83,10 @@ class UsersService {
 
     const { userId } = req.params;
 
+    const findByUser = await this.usersRepositories.findByUser(userId);
+
+    if (!findByUser) throw new Error('존재하지 않는 미니홈피 입니다.');
+
     const time = Date.now();
 
     // 중복된 아이피가 있는지 검증하기위해 repository 요청
@@ -98,12 +102,11 @@ class UsersService {
         ip: ipAdress,
         time,
       });
-
     // 이전 조회수 업데이트 날짜와 현재 날짜가 다를경우 today는 1로 초기화, total +1
     // 구현되는 것을 확인하기 위해 1분마다 today 초기화
-    const day = new Date();
-    const intervalDay =
-      ('' + day).split(':')[1] - existIp.updatedAt.split(':')[1] === 0;
+    const day = new Date() + '';
+    const myhomeDay = existIp.updatedAt + '';
+    const intervalDay = day.split(':')[1] - myhomeDay.split(':')[1] === 0;
 
     if (!intervalDay)
       return await this.usersRepositories.newTodayTotal({
@@ -129,13 +132,12 @@ class UsersService {
     return await this.usersRepositories.findByUser(userId);
   };
 
-
-  introupdate = async(userId,intro)=>{
-    const introupdate = await this.usersRepositories.introUpdate(userId,intro)
+  introupdate = async (userId, intro) => {
+    const introupdate = await this.usersRepositories.introUpdate(userId, intro);
     return {
-      userId : introupdate.userId,
-      intro : introupdate.intro
-    }
-  }
+      userId: introupdate.userId,
+      intro: introupdate.intro,
+    };
+  };
 }
 module.exports = UsersService;

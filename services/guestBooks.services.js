@@ -7,10 +7,7 @@ class GuestBooksService {
     const { guestbook } = req.body;
     const { userId } = req.params;
     const { user } = res.locals;
-    // const user = {
-    //   userId: 1,
-    //   name: '홍길동',
-    // };
+
     const existUser = await this.guestBooksRepository.findByUser(userId);
     if (!existUser) throw new Error('미니홈피가 존재하지 않습니다.');
 
@@ -20,7 +17,7 @@ class GuestBooksService {
     if (+userId === user.userId)
       throw new Error('내 미니홈피에는 방명록 작성이 불가합니다.');
 
-    return await this.guestBooksRepository.createBook({
+    await this.guestBooksRepository.createBook({
       writerId: user.userId,
       name: user.name,
       userId,
@@ -37,9 +34,7 @@ class GuestBooksService {
     const { userId, guestbookId } = req.params;
     const { guestbook } = req.body;
     const { user } = res.locals;
-    // const user = {
-    //   userId: 1,
-    // };
+
     if (!guestbook) throw new Error('수정할 방명록을 입력해주세요.');
     const findGuestBook = await this.guestBooksRepository.findByGuestBook(
       guestbookId
@@ -56,9 +51,7 @@ class GuestBooksService {
   deleteBook = async (req, res, next) => {
     const { userId, guestbookId } = req.params;
     const { user } = res.locals;
-    // const user = {
-    //   userId: 1,
-    // };
+
     const findGuestBook = await this.guestBooksRepository.findByGuestBook(
       guestbookId
     );

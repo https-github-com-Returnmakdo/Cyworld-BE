@@ -7,18 +7,19 @@ class DiaryRepository {
     return diaries;
   };
 
-  createDiary = async (userId, content, diaryNo) => {
+  createDiary = async (userId, dirImg, content, diaryNo) => {
     const createDiaryData = await Diaries.create({
       userId,
+      dirImg,
       content,
       diaryNo,
     });
     return createDiaryData;
   };
 
-  updateDiary = async (diaryId, userId, content) => {
+  updateDiary = async (diaryId, dirImg, userId, content) => {
     const updateDiaryData = await Diaries.update(
-      { content: content },
+      { content: content, dirImg: dirImg },
       { where: { diaryId, userId } }
     );
     return updateDiaryData;

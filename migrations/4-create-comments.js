@@ -16,6 +16,11 @@ module.exports = {
       userId: {
         type: Sequelize.DataTypes.INTEGER,
         allowNull: false,
+        references: {
+          model: 'Users',
+          key: 'userId',
+        },
+        onDelete: 'cascade',
       },
       comment: {
         type: Sequelize.DataTypes.STRING,

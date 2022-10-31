@@ -6,12 +6,14 @@ module.exports = {
       userId: {
         allowNull: false,
         autoIncrement: true,
+        unique: true,
         primaryKey: true,
         type: Sequelize.DataTypes.INTEGER,
       },
       email: {
         type: Sequelize.DataTypes.STRING,
         allowNull: true,
+        unique: true,
       },
       name: {
         type: Sequelize.DataTypes.STRING,
@@ -49,13 +51,13 @@ module.exports = {
         allowNull: true,
         defaultValue: '',
       },
-      snsId:{
-        type:Sequelize.DataTypes.STRING,
-        allowNull:true,
+      snsId: {
+        type: Sequelize.DataTypes.STRING,
+        allowNull: true,
       },
       provider: {
         type: Sequelize.DataTypes.STRING,
-        allowNull:true,
+        allowNull: true,
       },
       createdAt: {
         allowNull: false,
