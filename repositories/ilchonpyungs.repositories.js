@@ -9,9 +9,9 @@ class IlchonpyungsRepository {
     await this.Ilchonpyungs.create(best);
   };
 
-  findByWriter = async (writerId) => {
+  findByWriter = async (userId, writerId) => {
     return await this.Ilchonpyungs.findOne({
-      where: { writerId },
+      where: { userId, writerId },
     });
   };
 
