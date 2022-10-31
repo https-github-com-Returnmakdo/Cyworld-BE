@@ -1,8 +1,8 @@
 const { Users, MyHomeCounts } = require('../models');
 const { Op } = require('sequelize');
 class UsersRepositories {
-  createUser = async (email, name, password, gender, birth) => {
-    const createUser = await Users.create(email, name, password, gender, birth);
+  createUser = async (user) => {
+    const createUser = await Users.create(user);
     return createUser;
   };
 
@@ -66,12 +66,12 @@ class UsersRepositories {
     await Users.update({ today: 1 }, { where: { userId } });
   };
 
-  introUpdate = async(userId,intro)=>{
-    const introupdate =  await Users.update(
-        {intro:intro},
-        {where: {userId}}
-    )
+  introUpdate = async (userId, intro) => {
+    const introupdate = await Users.update(
+      { intro: intro },
+      { where: { userId } }
+    );
     return introupdate;
-  }
+  };
 }
 module.exports = UsersRepositories;
