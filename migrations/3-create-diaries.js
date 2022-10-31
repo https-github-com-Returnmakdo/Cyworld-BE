@@ -11,12 +11,10 @@ module.exports = {
       },
       userId: {
         type: Sequelize.INTEGER,
-        allowNull: false,
-        references: {
-          model: 'Users',
-          key: 'userId',
-        },
-        onDelete: 'cascade',
+      },
+      name: {
+        type: Sequelize.STRING,
+        allowNull: true,
       },
       content: {
         type: Sequelize.DataTypes.STRING,
@@ -27,7 +25,7 @@ module.exports = {
         allowNull: true,
       },
       diaryNo: {
-        type: Sequelize.DataTypes.INTEGER,
+        type: Sequelize.DataTypes.STRING,
         allowNull: false,
       },
       createdAt: {
