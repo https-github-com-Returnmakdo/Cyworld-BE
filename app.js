@@ -3,13 +3,17 @@ require('dotenv').config();
 const fs = require('fs');
 const HTTPS = require('https');
 const express = require('express');
+const hpp = require('hpp');
 const cors = require('cors');
+const { stream } = require('./util/logger');
 const helmet = require('helmet');
 const morgan = require('morgan');
 const {
   errorHandler,
   errorLogger,
 } = require('./middlewares/error-hander.middleware');
+// const { myHomeCountSchedule } = require('./util/setSchedule');
+
 //
 const cookieParser = require('cookie-parser');
 const session = require('cookie-session');
@@ -24,6 +28,8 @@ let corsOptions = {
   origin: ['http://localhost:3000', 'https://cyworld-client.vercel.app'],
   credentials: true,
 };
+
+// myHomeCountSchedule();
 
 // middlewares
 app.use(
@@ -42,9 +48,10 @@ app.use(passport.session());
 app.use(cors(corsOptions));
 app.use(cookieParser());
 app.use(helmet());
-app.use(morgan('tiny'));
+app.use(morgan('combined', { stream }));
 app.use(express.json());
 app.use('/api', router);
+app.use(hpp());
 app.use(express.urlencoded({ extended: false }));
 app.use(errorLogger); // Error Logger
 app.use(errorHandler); // Error Handler
