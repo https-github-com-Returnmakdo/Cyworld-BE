@@ -14,14 +14,14 @@ class UsersController {
       if (!email || !name || !password || !confirm || !gender || !birth) {
         return res.status(400).send({
           ok: false,
-          errorMessage: '형식을 확인해주세요.',
+          msg: '형식을 확인해주세요.',
         });
       }
 
       if (password !== confirm) {
         return res.status(400).send({
           ok: false,
-          errorMessage: '비밀번호가 일치하지 않습니다.',
+          msg: '비밀번호가 일치하지 않습니다.',
         });
       }
 
@@ -29,14 +29,14 @@ class UsersController {
       if (emailcheck) {
         return res.status(400).send({
           ok: false,
-          errorMessage: '이메일 중복검사를 해주세요.',
+          msg: '이메일 중복검사를 해주세요.',
         });
       }
 
       if (name.includes(password) || password.includes(name)) {
         return res.status(400).send({
           ok: false,
-          errorMessage: '이름과 비밀번호를 다른형식으로 설정해주세요',
+          msg: '이름과 비밀번호를 다른형식으로 설정해주세요',
         });
       }
 
@@ -50,7 +50,7 @@ class UsersController {
       });
 
       await this.usersService.createUser(users);
-      res.status(201).json({ message: '회원가입에 성공하셨습니다.' });
+      res.status(201).json({ msg: '회원가입에 성공하셨습니다.' });
     } catch (error) {
       next(error);
     }
@@ -67,7 +67,7 @@ class UsersController {
         userId: user.userId,
         accessToken: user.accessToken,
         refreshToken: user.refreshToken,
-        message: '로그인에 성공하였습니다',
+        msg: '로그인에 성공하였습니다',
       });
     } catch (error) {
       next(error);
@@ -78,16 +78,16 @@ class UsersController {
   emailCheck = async (req, res, next) => {
     try {
       let { email } = req.body;
-      console.log('11111',email);
-      email = email + '@cyworld.com'
+      console.log('11111', email);
+      email = email + '@cyworld.com';
       const emailCheck = await this.usersService.duplicate(email);
-      console.log('222222',email)
+      console.log('222222', email);
       console.log(emailCheck);
       if (emailCheck) {
         throw new Error('이미 등록된 사용자입니다.');
       }
       if (!emailCheck) {
-        res.status(200).json({ message: '사용 가능한 이메일입니다.' });
+        res.status(200).json({ msg: '사용 가능한 이메일입니다.' });
       }
     } catch (error) {
       next(error);
@@ -97,12 +97,9 @@ class UsersController {
   surfing = async (req, res, next) => {
     try {
       const result = await this.usersService.surfing();
-
       res.status(200).send({ data: result.userId });
     } catch (error) {
-      res
-        .status(error.status || 400)
-        .send({ ok: false, message: error.message });
+      res.status(error.status || 400).send({ ok: false, msg: error.message });
     }
   };
 
@@ -112,9 +109,7 @@ class UsersController {
       const result = await this.usersService.myhome(req, res);
       res.status(200).send({ data: result });
     } catch (error) {
-      res
-        .status(error.status || 400)
-        .send({ ok: false, message: error.message });
+      res.status(error.status || 400).send({ ok: false, msg: error.message });
     }
   };
 
@@ -127,20 +122,20 @@ class UsersController {
   //     next(error);
   //   }
   // };
-  intro = async(req,res,next)=>{
-    try{
-      const {userId} =req.params;
-      const {intro} = req.body;
-      console.log(intro)
-      const introupdate = await this.usersService.introupdate(userId,intro);
-      console.log(introupdate)
-      res.status(200).json({data:introupdate,message:"intro가 수정되었습니다"})
-    }catch(error){
-      res.status(error.status||400)
-      .send({ok:false, message:error.message})
+  intro = async (req, res, next) => {
+    try {
+      const { userId } = req.params;
+      const { intro } = req.body;
+      console.log(intro);
+      const introupdate = await this.usersService.introupdate(userId, intro);
+      console.log(introupdate);
+      res
+        .status(200)
+        .json({ data: introupdate, msg: 'intro가 수정되었습니다' });
+    } catch (error) {
+      res.status(error.status || 400).send({ ok: false, msg: error.message });
     }
-  }
-
+  };
 }
 
 module.exports = UsersController;

@@ -5,7 +5,7 @@ const guestBooksController = new GuestBooksController();
 const auth = require('../middlewares/authMiddlewares');
 
 router
-  .route('/:userId/:guestbookId')
+  .route('/:guestbookId/:userId')
   .put(auth, guestBooksController.updateBook)
   .delete(auth, guestBooksController.deleteBook);
 

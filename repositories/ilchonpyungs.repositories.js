@@ -6,28 +6,34 @@ class IlchonpyungsRepository {
     this.Users = Users;
   }
   createBest = async (best) => {
-    return await this.Ilchonpyungs.create(best);
+    await this.Ilchonpyungs.create(best);
+  };
+
+  findByWriter = async (writerId) => {
+    return await this.Ilchonpyungs.findOne({
+      where: { writerId },
+    });
   };
 
   getBests = async (userId) => {
     return await this.Ilchonpyungs.findAll({
       where: { userId },
-      order: [['ilchonId', 'desc']],
+      order: [['ilchonpyungId', 'desc']],
     });
   };
 
-  findByBest = async (ilchonId) => {
-    return this.Ilchonpyungs.findByPk(ilchonId);
+  findByBest = async (ilchonpyungId) => {
+    return await this.Ilchonpyungs.findByPk(ilchonpyungId);
   };
 
-  deleteBest = async (userId, ilchonId) => {
-    return this.Ilchonpyungs.destroy({
-      where: { userId, ilchonId },
+  deleteBest = async (userId, ilchonpyungId) => {
+    await await this.Ilchonpyungs.destroy({
+      where: { userId, ilchonpyungId },
     });
   };
 
   findByUser = async (userId) => {
-    return this.Users.findByPk(userId);
+    return await this.Users.findByPk(userId);
   };
 }
 

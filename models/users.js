@@ -9,6 +9,26 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      this.hasMany(models.Ilchonpyungs, {
+        as: 'Ilchonpyungs',
+        foreignKey: 'userId',
+      });
+      this.hasMany(models.Diaries, {
+        as: 'Diaries',
+        foreignKey: 'userId',
+      });
+      this.hasMany(models.Comments, {
+        as: 'Comments',
+        foreignKey: 'userId',
+      });
+      this.hasMany(models.Guestbooks, {
+        as: 'Guestbooks',
+        foreignKey: 'userId',
+      });
+      // this.hasMany(models.Ilchons, {
+      //   as: 'ilchons',
+      //   foreignKey: 'userId',
+      // });
     }
   }
   Users.init(
@@ -17,6 +37,7 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false, // NOT NULL, Null을 허용하지 않음
         autoIncrement: true, // AUTO_INCREMENT
         primaryKey: true, // PRIMARY KEY, 기본키
+        unique: true,
         type: DataTypes.INTEGER,
       },
       email: {
