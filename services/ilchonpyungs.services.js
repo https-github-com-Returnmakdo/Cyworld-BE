@@ -18,12 +18,13 @@ class IlchonpyungsService {
     if (ilchonpyung.length < 3)
       throw new Error('일촌평을 3자이상 입력해주세요.');
 
-      // 본인의 미니홈피에 일촌평 작성시 예외처리
+    // 본인의 미니홈피에 일촌평 작성시 예외처리
     if (+userId === user.userId)
       throw new Error('내 미니홈피에는 일촌평 작성이 불가합니다.');
 
-      // 두 개 이상의 일촌평 작성 시도시 예외처리
+    // 두 개 이상의 일촌평 작성 시도시 예외처리
     const existBest = await this.ilchonpyungsRepository.findByWriter(
+      userId,
       user.userId
     );
     if (existBest) throw new Error('일촌평은 하나만 작성 가능합니다.');
