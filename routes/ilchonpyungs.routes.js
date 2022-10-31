@@ -5,7 +5,7 @@ const ilchonpyungsController = new IlchonpyungsController();
 const auth = require('../middlewares/authMiddlewares');
 
 router
-  .route('/:userId/:ilchonId')
+  .route('/:ilchonpyungId/:userId')
   .delete(auth, ilchonpyungsController.deleteBest);
 
 router
