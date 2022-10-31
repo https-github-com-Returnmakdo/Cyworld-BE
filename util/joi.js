@@ -12,7 +12,7 @@ module.exports = {
       .error(new Error('이메일 형식이 올바르지 않습니다.')),
     name: Joi.string()
       // .pattern(nameRegEx)
-      .max(5)
+      // .max(5)
       .required()
       .error(
         new Error('이름은 최소 1~5자, 한글 또는 영문으로 구성되어야 합니다.')

@@ -60,16 +60,26 @@ class UsersController {
   login = async (req, res, next) => {
     try {
       const { email, password } = await Joi.loginSchema.validateAsync(req.body);
-      const user = await this.usersService.userLogin(email, password);
-      res.cookie('accessToken', user.accessToken);
-      res.cookie('refreshToken', user.refreshToken);
-      res.status(200).json({
-        email: user.email,
-        userId: user.userId,
-        accessToken: user.accessToken,
-        refreshToken: user.refreshToken,
-        msg: '로그인에 성공하였습니다',
-      });
+      const { accessToken, refreshToken } = await this.usersService.userLogin(
+        email,
+        password
+      );
+      // res.cookie('accessToken', accessToken);
+      // res.cookie('refreshToken', refreshToken);
+      // res.status(200).json({
+      //   email: user.email,
+      //   userId: user.userId,
+      //   accessToken: user.accessToken,
+      //   refreshToken: user.refreshToken,
+      //   msg: '로그인에 성공하였습니다',
+      // });
+      res
+        .status(200)
+        .set({
+          Authorization: 'Bearer ' + accessToken,
+          refreshToken,
+        })
+        .json({ msg: '로그인 되었습니다.' });
     } catch (error) {
       next(error);
     }

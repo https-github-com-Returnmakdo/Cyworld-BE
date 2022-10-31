@@ -5,13 +5,15 @@ class IlchonpyungsService {
 
   // 일촌평 작성
   createBest = async (req, res, next) => {
-    const { ilchonpyung } = req.body;
+    const { ilchonpyung, nick } = req.body;
     const { userId } = req.params;
     const { user } = res.locals;
 
     // 미니홈피의 user data가 없을시
     const existUser = await this.ilchonpyungsRepository.findByUser(userId);
     if (!existUser) throw new Error('미니홈피가 존재하지 않습니다.');
+
+    if (!nick) throw new Error('일촌명을 입력해주세요.');
 
     // 일촌평을 작성하지 않거나 3자 이하로 작성시 예외처리
     if (!ilchonpyung) throw new Error('일촌평을 작성해주세요.');
@@ -31,6 +33,7 @@ class IlchonpyungsService {
 
     await this.ilchonpyungsRepository.createBest({
       userId,
+      nick,
       name: user.name,
       writerId: user.userId,
       ilchonpyung,

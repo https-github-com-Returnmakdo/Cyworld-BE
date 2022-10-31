@@ -41,6 +41,10 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING,
         allowNull: false,
       },
+      nick: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
       ilchonpyung: {
         type: DataTypes.STRING,
         allowNull: true,
