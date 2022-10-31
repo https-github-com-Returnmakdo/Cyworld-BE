@@ -9,11 +9,6 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      this.belongsTo(models.Users, { foreignKey: 'userId' });
-      this.hasMany(models.Comments, {
-        as: 'Comments',
-        foreignKey: 'diaryId',
-      });
     }
   }
   Diaries.init(
@@ -27,11 +22,10 @@ module.exports = (sequelize, DataTypes) => {
       userId: {
         type: DataTypes.INTEGER,
         allowNull: false,
-        references: {
-          model: 'Users',
-          key: 'userId',
-        },
-        onDelete: 'cascade',
+      },
+      name: {
+        type: DataTypes.STRING,
+        allowNull: true,
       },
       content: {
         type: DataTypes.STRING,
@@ -42,7 +36,7 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: true,
       },
       diaryNo: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.STRING,
         allowNull: false,
       },
     },

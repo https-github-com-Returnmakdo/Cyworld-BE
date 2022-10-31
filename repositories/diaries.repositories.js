@@ -7,9 +7,10 @@ class DiaryRepository {
     return diaries;
   };
 
-  createDiary = async (userId, dirImg, content, diaryNo) => {
+  createDiary = async (userId, name, dirImg, content, diaryNo) => {
     const createDiaryData = await Diaries.create({
       userId,
+      name,
       dirImg,
       content,
       diaryNo,
