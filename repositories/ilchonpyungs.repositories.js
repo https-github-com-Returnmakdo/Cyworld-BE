@@ -15,6 +15,7 @@ class IlchonpyungsRepository {
     });
   };
 
+  // 일촌평 목록 조회 시 ilchonpyungId 기준 내림차순 조회
   getBests = async (userId) => {
     return await this.Ilchonpyungs.findAll({
       where: { userId },

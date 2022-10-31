@@ -3,6 +3,7 @@ const IlchonpyungsService = require('../services/ilchonpyungs.services');
 class IlchonpyungsController {
   ilchonpyungsService = new IlchonpyungsService();
 
+  // 일촌평 작성
   createBest = async (req, res, next) => {
     try {
       await this.ilchonpyungsService.createBest(req, res);
@@ -12,6 +13,7 @@ class IlchonpyungsController {
     }
   };
 
+  // 일촌평 목록 조회
   getBests = async (req, res, next) => {
     try {
       const result = await this.ilchonpyungsService.getBests(req, res);
@@ -21,6 +23,7 @@ class IlchonpyungsController {
     }
   };
 
+  // 일촌평 삭제
   deleteBest = async (req, res, next) => {
     try {
       await this.ilchonpyungsService.deleteBest(req, res);

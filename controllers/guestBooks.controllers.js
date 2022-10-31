@@ -3,6 +3,7 @@ const GuestBooksService = require('../services/guestBooks.services');
 class GuestBooksController {
   guestBooksService = new GuestBooksService();
 
+  // 방명록 작성
   createBook = async (req, res, next) => {
     try {
       await this.guestBooksService.createBook(req, res);
@@ -12,6 +13,7 @@ class GuestBooksController {
     }
   };
 
+  // 방명록 목록 조회
   getBooks = async (req, res, next) => {
     try {
       const result = await this.guestBooksService.getBooks(req, res);
@@ -21,6 +23,7 @@ class GuestBooksController {
     }
   };
 
+  // 방명록 수정
   updateBook = async (req, res, next) => {
     try {
       await this.guestBooksService.updateBook(req, res);
@@ -30,6 +33,7 @@ class GuestBooksController {
     }
   };
 
+  // 방명록 삭제
   deleteBook = async (req, res, next) => {
     try {
       await this.guestBooksService.deleteBook(req, res);
