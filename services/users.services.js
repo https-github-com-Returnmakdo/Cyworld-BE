@@ -9,11 +9,16 @@ class UsersService {
   createUser = async (users) => {
     const { email, name, password, gender, birth } = users;
 
+    let isGender;
+
+    if (gender === '남자') isGender = 'man';
+    else isGender = 'lady';
+
     await this.usersRepositories.createUser({
       email: email + '@cyworld.com',
       name: name,
       password: password,
-      gender: gender,
+      gender: `https://qportminiprojectmini.s3.ap-northeast-2.amazonaws.com/sample/${isGender}.png`,
       birth: birth,
     });
   };
@@ -24,11 +29,11 @@ class UsersService {
     });
   };
 
-  duplicate = async (email) => {
-    return await this.usersRepositories.findOneEmail({
-      email: email + '@cyworld.com',
-    });
-  };
+  // duplicate = async (email) => {
+  //   return await this.usersRepositories.findOneEmail({
+  //     email: email + '@cyworld.com',
+  //   });
+  // };
 
   userLogin = async (email, password) => {
     const user = await this.usersRepositories.findOneEmail({ email });
