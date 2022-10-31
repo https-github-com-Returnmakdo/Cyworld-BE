@@ -10,6 +10,7 @@ class GuestBooksRepository {
     await this.Guestbooks.create(book);
   };
 
+  // 방명록 조회시 guestbookId 기준 내림차순으로 조회
   getBooks = async (userId) => {
     return await this.Guestbooks.findAll({
       where: { userId },
