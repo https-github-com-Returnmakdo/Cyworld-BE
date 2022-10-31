@@ -26,7 +26,7 @@ class UsersService {
 
   duplicate = async (email) => {
     return await this.usersRepositories.findOneEmail({
-      email,
+      email: email + '@cyworld.com',
     });
   };
 
