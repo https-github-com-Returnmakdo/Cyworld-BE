@@ -13,8 +13,13 @@ class DiaryController {
   createDiary = async (req, res) => {
     const { userId } = req.params;
     const { content, diaryNo } = req.body;
+    const { name } = res.locals.user;
+    const userInfo = res.locals.user;
     if (!content) {
       res.status(400).json({ message: '내용을 입력해주세요!' });
+    }
+    if (userInfo.userId !== Number(userId)) {
+      res.status(400).json({ message: '작성 권한이 없습니다.' });
     }
     // 파일이 있으면 key값으로 이름을 정하고 없으면 null
     const imageFileName = req.file ? req.file.key : null;
@@ -25,6 +30,7 @@ class DiaryController {
 
     const createDiaryData = await this.diaryController.createDiary(
       userId,
+      name,
       dirImg,
       content,
       diaryNo

@@ -27,9 +27,10 @@ class DiaryService {
     });
   };
 
-  createDiary = async (userId, dirImg, content, diaryNo) => {
+  createDiary = async (userId, name, dirImg, content, diaryNo) => {
     const createDiaryData = await this.diaryService.createDiary(
       userId,
+      name,
       dirImg,
       content,
       diaryNo
@@ -38,6 +39,7 @@ class DiaryService {
     return {
       diaryId: createDiaryData.diaryId,
       userId: createDiaryData.userId,
+      name: createDiaryData.name,
       dirImg: createDiaryData.dirImg,
       content: createDiaryData.content,
       diaryNo: createDiaryData.diaryNo,

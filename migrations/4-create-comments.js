@@ -7,7 +7,7 @@ module.exports = {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
       },
       diaryId: {
         type: Sequelize.DataTypes.INTEGER,
@@ -22,21 +22,30 @@ module.exports = {
         },
         onDelete: 'cascade',
       },
+      name: {
+        type: Sequelize.DataTypes.STRING,
+        allowNull: false,
+        // references: {
+        //   model: 'Users',
+        //   key: 'name',
+        // },
+        // onDelete: 'cascade',
+      },
       comment: {
         type: Sequelize.DataTypes.STRING,
         allowNull: false,
       },
       createdAt: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
       },
       updatedAt: {
         allowNull: false,
-        type: Sequelize.DATE
-      }
+        type: Sequelize.DATE,
+      },
     });
   },
   async down(queryInterface, Sequelize) {
     await queryInterface.dropTable('Comments');
-  }
+  },
 };
