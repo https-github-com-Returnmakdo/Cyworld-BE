@@ -13,4 +13,7 @@ router.get('/myhome/:userId', usersController.myhome);
 router.put('/myhome/:userId', auth, usersController.intro);
 // router.get('/dotori/:userId', usersController.getDotori);
 // router.put('/dotori', auth, usersController.chargeDotori);
+// router.post('/',usersController.chargeCoupons)
+
+
 module.exports = router;

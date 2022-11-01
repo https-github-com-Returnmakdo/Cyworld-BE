@@ -46,18 +46,18 @@ class UsersService {
     if (!isEqual) {
       throw new Error('비밀번호가 다릅니다.');
     }
-    const accessToken = jwt.sign(
+    const accesstoken = jwt.sign(
       { userId: user.userId },
       process.env.SECRET_KEY,
       { expiresIn: '1h' }
     );
-    const refreshToken = jwt.sign(
+    const refreshtoken = jwt.sign(
       { userId: user.userId },
       process.env.SECRET_KEY,
       { expiresIn: '14d' }
     );
-    await this.usersRepositories.updateRefresh(refreshToken, user);
-    return { accessToken, refreshToken, userId: user.userId };
+    await this.usersRepositories.updateRefresh(refreshtoken, user);
+    return { accesstoken, refreshtoken, userId: user.userId };
   };
 
   findOneId = async (userId) => {
@@ -152,7 +152,6 @@ class UsersService {
   //   // 2. 예외처리로 둘다 입력안됬을 때와 둘다 입력했을때, 틀린 쿠폰번호 입력했을때
   //   const { userId } = res.locals.user;
   //   const { coupon, price } = req.body;
-  //   const chargePrice = 10000;
 
   //   // 두 방법으로 한번에 충전 시도시 예외처리.
   //   if (coupon && price)
@@ -162,12 +161,13 @@ class UsersService {
   //   if (!coupon && !price)
   //     throw new Error('충전할 금액 혹은 쿠폰번호를 입력해주세요.');
 
-  //   if (isNaN(coupon) || isNaN(price)) throw new Error('숫자만 입력해주세요.');
+  //   // if (isNaN(coupon) || isNaN(price)) throw new Error('숫자만 입력해주세요.');
 
   //   // 충전 금액 입력시 해당하는 도토리 비율만큼 충전
   //   if (!coupon && price) {
   //     if (price < 100) throw new Error('100원 이상부터 충전 가능합니다.');
-  //     await this.usersRepositories.chargeDotori(userId, price);
+  //     if (price % 100 !== 0) throw new Error('100원단위로 충전 가능합니다.');
+  //     await this.usersRepositories.chargeDotori(userId, +price / 100);
   //   }
 
   //   // 쿠폰 입력시 해당하는 도토리 비율만큼 충전
@@ -178,11 +178,16 @@ class UsersService {
   //     if (getCoupon.status === 'x') throw new Error('이미 사용된 쿠폰입니다.');
 
   //     // 도토리 충전 및 쿠폰 사용처리
-  //     await this.usersRepositories.chargeDotori(userId, chargePrice);
+  //     await this.usersRepositories.chargeDotori(userId, getCoupon.price);
   //     await this.usersRepositories.afterCoupon(getCoupon.couponId);
   //   }
 
-  //   return chargePrice / 100 || price / 100;
+  //   return price / 100;
+  // };
+
+  // chargeCoupons = async (req, res, next) => {
+  //   const { boop } = req.body;
+  //   await this.usersRepositories.chargeCoupons();
   // };
 }
 module.exports = UsersService;

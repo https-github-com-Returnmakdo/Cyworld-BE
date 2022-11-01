@@ -4,10 +4,11 @@ const router = express.Router();
 
 router.use('/users', require('./users.routes'));
 router.use('/bests', require('./ilchonpyungs.routes'));
+router.use('/coupons', require('./users.routes'));
 
 router.use('/diaries', require('./diaries.routes'));
 router.use('/diaries/comments', require('./comments.routes'));
 router.use('/guestbooks', require('./guestBooks.routes'));
-router.use('/',require('./kakao.routes'))
-router.use('/',require('./google.routes'))
+router.use('/', require('./kakao.routes'));
+router.use('/', require('./google.routes'));
 module.exports = router;
