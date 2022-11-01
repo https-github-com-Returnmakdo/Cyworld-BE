@@ -74,17 +74,6 @@ class UsersRepositories {
     return introupdate;
   };
 
-  adminId = async (userId,admin)=>{
-    const adminid = await Users.update({admin:1},{where:{userId}});
-      console.log(adminid)
-      return adminid;
-  };
-  
-  //관리자 확인
-  findAdmin = async (userId) => {
-    return await Users.findOne({where:{userId}});
-  };
-
   updotori = async(userId,dotori)=>{
     return await Users.update({dotori:dotori},{where:{userId}});
   }
