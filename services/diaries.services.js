@@ -27,10 +27,10 @@ class DiaryService {
     });
   };
 
-  createDiary = async (userId, name, dirImg, content, diaryNo) => {
+  createDiary = async (userId, dirImg, content, diaryNo) => {
     const createDiaryData = await this.diaryService.createDiary(
       userId,
-      name,
+      // name,
       dirImg,
       content,
       diaryNo
@@ -47,10 +47,10 @@ class DiaryService {
     };
   };
 
-  updateDiary = async (diaryId, userId, dirImg, content) => {
+  updateDiary = async (diaryId, dirImg, content) => {
     const updateDiaryData = await this.diaryService.updateDiary(
       diaryId,
-      userId,
+      // userId,
       dirImg,
       content
     );
@@ -58,6 +58,7 @@ class DiaryService {
     return {
       diaryId: updateDiaryData.diaryId,
       userId: updateDiaryData.userId,
+      // name: updateDiaryData.name,
       dirImg: updateDiaryData.dirImg,
       content: updateDiaryData.content,
       diaryNo: updateDiaryData.diaryNo,
@@ -65,16 +66,9 @@ class DiaryService {
     };
   };
 
-  deleteDiary = async (diaryId) => {
+  deleteDiary = async (diaryId, userId) => {
     const deleteDiaryData = await this.diaryService.deleteDiary(diaryId);
-
-    return {
-      diaryId: deleteDiaryData.diaryId,
-      userId: deleteDiaryData.userId,
-      content: deleteDiaryData.content,
-      diaryNo: deleteDiaryData.diaryNo,
-      createdAt: deleteDiaryData.createdAt,
-    };
+    return deleteDiaryData;
   };
 }
 
