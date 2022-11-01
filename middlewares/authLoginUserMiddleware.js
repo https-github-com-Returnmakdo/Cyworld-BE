@@ -1,5 +1,8 @@
 module.exports = (req, res, next) => {
   try {
+    if (!req.header.auth) {
+      return next();
+    }
     const { accessToken, refreshToken } = req.headers.auth || req.cookies;
 
     if (accessToken || refreshToken) {
@@ -7,11 +10,6 @@ module.exports = (req, res, next) => {
         errorMessage: '이미 로그인이 되어있습니다.',
       });
     }
-
-    if (!req.header.auth) {
-      return next();
-    }
-
     next();
   } catch (error) {
     console.trace(error);

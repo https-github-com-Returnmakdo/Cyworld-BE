@@ -31,7 +31,8 @@
     "passport-kakao": "^1.0.1",
     "passport-naver": "^1.0.6",
     "prettier": "^2.7.1",
-    "sequelize": "^6.25.3"
+    "sequelize": "^6.25.3",
+    "sharp": "^0.31.1"
   },
   "devDependencies": {
     "morgan": "^1.10.0",
