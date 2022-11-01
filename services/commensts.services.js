@@ -3,8 +3,8 @@ const CommentRepository = require('../repositories/commensts.repositories');
 class CommentService {
   commentService = new CommentRepository();
 
-  findAllComment = async (diaryId) => {
-    const allComment = await this.commentService.findAllComment(diaryId);
+  findAllComment = async (userId) => {
+    const allComment = await this.commentService.findAllComment(userId);
     return allComment;
   };
 
@@ -12,11 +12,13 @@ class CommentService {
     const createCommentData = await this.commentService.createComment(
       diaryId,
       userId,
+      // name,
       comment
     );
     return {
       diaryId: createCommentData.diaryId,
       userId: createCommentData.userId,
+      // name: createCommentData.name,
       comment: createCommentData.comment,
     };
   };

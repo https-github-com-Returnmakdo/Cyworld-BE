@@ -3,28 +3,28 @@ const { Users } = require('../models');
 require('dotenv').config();
 module.exports = async (req, res, next) => {
   try {
-    const { accessToken, refreshToken } = req.headers.auth || req.cookies;
+    console.log(req.headers)
+    const { accesstoken, refreshtoken } = req.headers || req.cookies;
 
-    if (!accessToken || !refreshToken) {
-      throw new InvalidParamsError('로그인 후 사용하세요');
+    if (!accesstoken || !refreshtoken) {
+      throw new Error('로그인 후 사용하세요');
     }
 
-    
-    const givemeAccess = accessValidate(accessToken);
-    const givemeRefresh = refreshValidate(refreshToken);
+    const givemeAccess = accessValidate(accesstoken);
+    const givemeRefresh = refreshValidate(refreshtoken);
 
-    function accessValidate(accessToken) {
+    function accessValidate(accesstoken) {
       try {
-        jwt.verify(accessToken, process.env.SECRET_KEY);
+        jwt.verify(accesstoken, process.env.SECRET_KEY);
         return true;
       } catch (error) {
         return false;
       }
     }
 
-    function refreshValidate(refreshToken) {
+    function refreshValidate(refreshtoken) {
       try {
-        jwt.verify(refreshToken, process.env.SECRET_KEY);
+        jwt.verify(refreshtoken, process.env.SECRET_KEY);
         return true;
       } catch (error) {
         return false;
@@ -35,7 +35,7 @@ module.exports = async (req, res, next) => {
       return res.status(419).json({ message: '다시 로그인 해주시길 바랍니다' });
 
     if (!givemeAccess) {
-      const { userId } = jwt.verify(refreshToken, process.env.SECRET_KEY);
+      const { userId } = jwt.verify(refreshtoken, process.env.SECRET_KEY);
 
       const newAccessToken = jwt.sign(
         { userId: userId },
@@ -50,7 +50,7 @@ module.exports = async (req, res, next) => {
 
       res.locals.user = user;
     } else {
-      const { userId } = jwt.verify(accessToken, process.env.SECRET_KEY);
+      const { userId } = jwt.verify(accesstoken, process.env.SECRET_KEY);
       const user = await Users.findByPk(userId);
       res.locals.user = user;
     }

@@ -72,8 +72,8 @@ class UsersController {
       // res
       //   .status(200)
       //   .set({
-      //     accessToken: 'Bearer ' + accessToken,
-      //     refreshToken,
+      //     accessToken: 'Bearer ' + user.accessToken,
+      //     refreshToken: user.refreshToken,
       //   })
       //   .json({ msg: '로그인 되었습니다.' });
     } catch (error) {
