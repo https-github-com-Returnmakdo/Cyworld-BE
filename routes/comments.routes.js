@@ -8,17 +8,17 @@ const commentController = new CommentController();
 router.get('/:userId', commentController.getComment);
 router.post(
   '/:diaryId/:userId',
-  // authMiddleware,
+  authMiddleware,
   commentController.createComment
 );
 router.put(
   '/:diaryId/:commentId',
-  // authMiddleware,
+  authMiddleware,
   commentController.updataComment
 );
 router.delete(
   '/:diaryId/:commentId',
-  // authMiddleware,
+  authMiddleware,
   commentController.deleteComment
 );
 

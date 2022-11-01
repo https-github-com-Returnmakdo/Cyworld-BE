@@ -81,7 +81,6 @@ class UsersController {
     }
   };
 
-
   //이메일 중복
   emailCheck = async (req, res, next) => {
     try {
@@ -140,43 +139,41 @@ class UsersController {
   };
 
   // admin 지정
-  admin = async(req,res,next)=>{
-    try{
-      const {userId} = req.body;
-      const admin = await this.usersService.adminId(userId)
-      console.log('111',admin)
-      res.status(200).json({admin,msg:'관리자 계정등록' ,userId:admin})
-
-    }catch(error){
-      res.status(error.status || 400).send({ ok: false, msg: error.message });
-    }
-  }
-
-  
-  checkAdmin = async (req, res, next) => {
+  admin = async (req, res, next) => {
     try {
-        const {userId} = res.locals.user;
-        await this.usersService.findAdmin(userId);
-        res.status(200).json({message:'관리자입니다.'});
+      const { userId } = req.body;
+      const admin = await this.usersService.adminId(userId);
+      console.log('111', admin);
+      res.status(200).json({ admin, msg: '관리자 계정등록', userId: admin });
     } catch (error) {
       res.status(error.status || 400).send({ ok: false, msg: error.message });
     }
-};
+  };
+
+  checkAdmin = async (req, res, next) => {
+    try {
+      const { userId } = res.locals.user;
+      await this.usersService.findAdmin(userId);
+      res.status(200).json({ message: '관리자입니다.' });
+    } catch (error) {
+      res.status(error.status || 400).send({ ok: false, msg: error.message });
+    }
+  };
 
   //도토리
   dotori = async (req, res, next) => {
-    const {userId,dotori} = req.body;
-    const findadmin = await this.usersService.findAdmin(userId)
+    const { userId, dotori } = req.body;
+    const findadmin = await this.usersService.findAdmin(userId);
     res.status(error.status || 400).send({ ok: false, msg: error.message });
-  // try {
-      if (findadmin === "관리자 확인완료") {
-          await this.usersService.dotori(userId,dotori);
-          res.status(200).json({message: '도토리가 충전되었습니다'});
-      }
-  // }catch (error) {
-  //   res.status(error.status || 400).send({ ok: false, msg: error.message });
-  // }
-};
+    // try {
+    if (findadmin === '관리자 확인완료') {
+      await this.usersService.dotori(userId, dotori);
+      res.status(200).json({ message: '도토리가 충전되었습니다' });
+    }
+    // }catch (error) {
+    //   res.status(error.status || 400).send({ ok: false, msg: error.message });
+    // }
+  };
 }
 
 module.exports = UsersController;
