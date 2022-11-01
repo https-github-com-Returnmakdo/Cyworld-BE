@@ -8,25 +8,24 @@ class CommentService {
     return allComment;
   };
 
-  createComment = async (diaryId, userId, comment) => {
+  createComment = async (diaryId, userId, name, comment) => {
     const createCommentData = await this.commentService.createComment(
       diaryId,
       userId,
-      // name,
+      name,
       comment
     );
     return {
       diaryId: createCommentData.diaryId,
       userId: createCommentData.userId,
-      // name: createCommentData.name,
+      name: createCommentData.name,
       comment: createCommentData.comment,
     };
   };
 
-  updateComment = async (commentId, userId, comment) => {
+  updateComment = async (commentId, comment) => {
     const updateCommentData = await this.commentService.updateComment(
       commentId,
-      userId,
       comment
     );
     return updateCommentData;

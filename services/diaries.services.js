@@ -39,7 +39,7 @@ class DiaryService {
     return {
       diaryId: createDiaryData.diaryId,
       userId: createDiaryData.userId,
-      name: createDiaryData.name,
+      // name: createDiaryData.name,
       dirImg: createDiaryData.dirImg,
       content: createDiaryData.content,
       diaryNo: createDiaryData.diaryNo,
@@ -58,7 +58,7 @@ class DiaryService {
     return {
       diaryId: updateDiaryData.diaryId,
       userId: updateDiaryData.userId,
-      // name: updateDiaryData.name,
+      name: updateDiaryData.name,
       dirImg: updateDiaryData.dirImg,
       content: updateDiaryData.content,
       diaryNo: updateDiaryData.diaryNo,

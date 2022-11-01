@@ -11,13 +11,13 @@ class CommentController {
 
   createComment = async (req, res) => {
     const { diaryId, userId } = req.params;
-    // const { name } = res.locals.user;
+    const { name } = res.locals.user;
     const { comment } = req.body;
 
     const createCommentData = await this.commentController.createComment(
       diaryId,
       userId,
-      // name,
+      name,
       comment
     );
     res.status(200).json({ data: createCommentData });
@@ -25,26 +25,39 @@ class CommentController {
 
   updataComment = async (req, res) => {
     const { commentId } = req.params;
-    const { userId } = res.locals.user;
+    const { userId, name } = res.locals.user;
     const { comment } = req.body;
-
-    const updateCommentData = await this.commentController.updateComment(
-      commentId,
-      userId,
-      comment
-    );
-    res.status(200).json({ data: updateCommentData });
+    const userInfo = res.locals.user;
+    try {
+      if (userId !== userInfo.userId) {
+        throw new Error('수정 권한이 없습니다.');
+      }
+      const updateCommentData = await this.commentController.updateComment(
+        commentId,
+        comment
+      );
+      res.status(200).json({ data: updateCommentData });
+    } catch (err) {
+      res.status(400).json({ err: err.message });
+    }
   };
 
   deleteComment = async (req, res) => {
     const { commentId } = req.params;
-    const { userId } = res.locals.user;
-
-    const deleteCommentData = await this.commentController.deleteComment(
-      commentId,
-      userId
-    );
-    res.status(200).json({ data: deleteCommentData });
+    const { userId, name } = res.locals.user;
+    const userInfo = res.locals.user;
+    try {
+      if (userId !== userInfo.userId) {
+        throw new Error('수정 권한이 없습니다.');
+      }
+      const deleteCommentData = await this.commentController.deleteComment(
+        commentId,
+        userId
+      );
+      res.status(200).json({ data: deleteCommentData });
+    } catch (err) {
+      res.status(400).json({ err: err.message });
+    }
   };
 }
 
