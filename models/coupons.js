@@ -19,14 +19,17 @@ module.exports = (sequelize, DataTypes) => {
         primaryKey: true,
         type: DataTypes.INTEGER,
       },
+      // 쿠폰 번호
       number: {
         type: DataTypes.INTEGER,
         allowNull: false,
       },
+      // 쿠폰 금액
       price: {
         type: DataTypes.INTEGER,
         allowNull: false,
       },
+      // 쿠폰 미사용 여부
       status: {
         type: DataTypes.STRING,
         allowNull: false,
