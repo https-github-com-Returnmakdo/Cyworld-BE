@@ -75,7 +75,10 @@ class UsersRepositories {
   };
 
   // chargeDotori = async (userId, price) => {
-  //   return await Users.update({ dotori: price / 100 }, { where: { userId } });
+  //   const isDotori = await this.findByUser(userId);
+  //   if (isDotori.dotori === null)
+  //     await Users.update({ dotori: 0 }, { where: { userId } });
+  //   return await Users.increment({ dotori: price }, { where: { userId } });
   // };
 
   // findCoupon = async (coupon) => {
@@ -92,5 +95,7 @@ class UsersRepositories {
   //     }
   //   );
   // };
+
+  // chargeCoupons = async () => {};
 }
 module.exports = UsersRepositories;
