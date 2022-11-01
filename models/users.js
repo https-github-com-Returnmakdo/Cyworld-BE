@@ -78,10 +78,18 @@ module.exports = (sequelize, DataTypes) => {
       refreshToken: {
         type: DataTypes.STRING,
       },
-      snsId: DataTypes.STRING,
-      provider: DataTypes.STRING,
-      admin :DataTypes.INTEGER,
-      dotori:DataTypes.INTEGER,
+      snsId: {
+        type: DataTypes.STRING,
+        allowNull: true,
+      },
+      provider: {
+        type: DataTypes.STRING,
+        allowNull: true,
+      },
+      dotori: {
+        type: DataTypes.INTEGER,
+        allowNull: true,
+      },
     },
     {
       sequelize,

@@ -146,28 +146,43 @@ class UsersService {
     };
   };
 
-  adminId = async(userId)=>{
-    await this.usersRepositories.adminId(userId)
-  }
-  
-  findAdmin = async (userId) => {
-    const findAdmin = await this.usersRepositories.findAdmin(userId);
-    if (findAdmin === 1) {
-      return ("관리자 확인완료");
-      }else {
-        throw new Error("권한이 없습니다");
-      }
-  }
-
   //도토리
-  dotori = async (userId,dotori) => {
-      await this.usersRepositories.updotori(userId,dotori);
-      if (dotori)
-      {
-        return;
-      } else {
-        throw new Error("해당정보의 유저가 없습니다.");
-      }
-  };
-  }
+  // chargeDotori = async (req, res) => {
+  //   // 1. 도토리 충전요청 받을때 직접 금약 입력과 쿠폰입력 2가지로 처리방식
+  //   // 2. 예외처리로 둘다 입력안됬을 때와 둘다 입력했을때, 틀린 쿠폰번호 입력했을때
+  //   const { userId } = res.locals.user;
+  //   const { coupon, price } = req.body;
+  //   const chargePrice = 10000;
+
+  //   // 두 방법으로 한번에 충전 시도시 예외처리.
+  //   if (coupon && price)
+  //     throw new Error('한 번에 하나의 방식으로만 충전 가능합니다.');
+
+  //   // 충전 금액과 쿠폰 미입력시
+  //   if (!coupon && !price)
+  //     throw new Error('충전할 금액 혹은 쿠폰번호를 입력해주세요.');
+
+  //   if (isNaN(coupon) || isNaN(price)) throw new Error('숫자만 입력해주세요.');
+
+  //   // 충전 금액 입력시 해당하는 도토리 비율만큼 충전
+  //   if (!coupon && price) {
+  //     if (price < 100) throw new Error('100원 이상부터 충전 가능합니다.');
+  //     await this.usersRepositories.chargeDotori(userId, price);
+  //   }
+
+  //   // 쿠폰 입력시 해당하는 도토리 비율만큼 충전
+  //   if (coupon && !price) {
+  //     // 유효하지 않거나 사용된 쿠폰인지 확인
+  //     const getCoupon = await this.usersRepositories.findCoupon(coupon);
+  //     if (!getCoupon) throw new Error('없는 쿠폰입니다.');
+  //     if (getCoupon.status === 'x') throw new Error('이미 사용된 쿠폰입니다.');
+
+  //     // 도토리 충전 및 쿠폰 사용처리
+  //     await this.usersRepositories.chargeDotori(userId, chargePrice);
+  //     await this.usersRepositories.afterCoupon(getCoupon.couponId);
+  //   }
+
+  //   return chargePrice / 100 || price / 100;
+  // };
+}
 module.exports = UsersService;
