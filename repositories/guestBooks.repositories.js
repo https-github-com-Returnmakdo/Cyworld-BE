@@ -14,7 +14,7 @@ class GuestBooksRepository {
   getBooks = async (userId) => {
     return await this.Guestbooks.findAll({
       where: { userId },
-      order: [['guestbookId', 'desc']],
+      // order: [['guestbookId', 'desc']],
     });
   };
 
