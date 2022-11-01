@@ -59,6 +59,16 @@ module.exports = {
         type: Sequelize.DataTypes.STRING,
         allowNull: true,
       },
+      admin : {
+        type: Sequelize.DataTypes.INTEGER,
+        allowNull: true,
+        defaultValue: 0,
+      },
+      dotori :{
+        type:Sequelize.DataTypes.INTEGER,
+        allowNull: true,
+        defaultValue: 0,
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,

@@ -11,5 +11,6 @@ router.post('/emailcheck',usersController.emailCheck)
 router.get('/surfing', usersController.surfing);
 router.get('/myhome/:userId', usersController.myhome);
 router.put('/myhome/:userId',auth,usersController.intro);
-
+router.put('/admin',usersController.admin)
+router.put('/dotori',usersController.dotori)
 module.exports = router;
