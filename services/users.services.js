@@ -146,27 +146,12 @@ class UsersService {
     };
   };
 
-  adminId = async(userId)=>{
-    await this.usersRepositories.adminId(userId)
-  }
-  
-  findAdmin = async (userId) => {
-    const findAdmin = await this.usersRepositories.findAdmin(userId);
-    if (findAdmin === 1) {
-      return ("관리자 확인완료");
-      }else {
-        throw new Error("권한이 없습니다");
-      }
-  }
-
   //도토리
-  dotori = async (userId,dotori) => {
-      await this.usersRepositories.updotori(userId,dotori);
-      if (dotori)
-      {
-        return;
-      } else {
-        throw new Error("해당정보의 유저가 없습니다.");
+  updotori = async (userId,dotori) => {
+      const updotori =await this.usersRepositories.updotori(userId,dotori);
+      return{
+        userId :updotori.userId,
+        dotori : updotori.dotori
       }
   };
   }

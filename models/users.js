@@ -80,7 +80,6 @@ module.exports = (sequelize, DataTypes) => {
       },
       snsId: DataTypes.STRING,
       provider: DataTypes.STRING,
-      admin :DataTypes.INTEGER,
       dotori:DataTypes.INTEGER,
     },
     {
