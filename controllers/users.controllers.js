@@ -61,11 +61,11 @@ class UsersController {
     try {
       const { email, password } = await Joi.loginSchema.validateAsync(req.body);
       const user = await this.usersService.userLogin(email, password);
-      res.cookie('accesstoken', user.accessToken);
-      res.cookie('refreshtoken', user.refreshToken);
+      res.cookie('accesstoken', user.accesstoken);
+      res.cookie('refreshtoken', user.refreshtoken);
       res.status(200).json({
-        accesstoken: user.accessToken,
-        refreshtoken: user.refreshToken,
+        accesstoken: user.accesstoken,
+        refreshtoken: user.refreshtoken,
         userId: user.userId,
         msg: '로그인에 성공하였습니다',
       });
@@ -139,14 +139,24 @@ class UsersController {
   };
 
   //도토리
-  // chargeDotori = async (req, res, next) => {
-  //   try {
-  //     const price = await this.usersService.chargeDotori(req, res);
-  //     res.status(200).send({ msg: `${price}원이 충전되었습니다.` });
-  //   } catch (error) {
-  //     res.status(error.status || 400).send({ ok: false, msg: error.message });
-  //   }
-  // };
+  chargeDotori = async (req, res, next) => {
+    try {
+      const price = await this.usersService.chargeDotori(req, res);
+      res.status(200).send({ msg: `도토리 ${price}개가 충전되었습니다.` });
+    } catch (error) {
+      res.status(error.status || 400).send({ ok: false, msg: error.message });
+    }
+  };
+
+  chargeCoupons = (req, res, next) => {
+    try {
+      res.status(200).send({msg:`쿠폰으로 ${coupon}개가 충전되었습니다.`})
+    } catch (error) {
+      res
+        .status(error.status || 400)
+        .send({ ok: false, msg: error.message });
+    }
+  };
 }
 
 module.exports = UsersController;
