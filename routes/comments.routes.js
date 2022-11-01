@@ -5,16 +5,20 @@ const authMiddleware = require('../middlewares/authMiddlewares');
 const CommentController = require('../controllers/commensts.controllers');
 const commentController = new CommentController();
 
-router.get('/:diaryId', commentController.getComment);
-router.post('/:diaryId', authMiddleware, commentController.createComment);
+router.get('/:userId', commentController.getComment);
+router.post(
+  '/:diaryId/:userId',
+  // authMiddleware,
+  commentController.createComment
+);
 router.put(
   '/:diaryId/:commentId',
-  authMiddleware,
+  // authMiddleware,
   commentController.updataComment
 );
 router.delete(
   '/:diaryId/:commentId',
-  authMiddleware,
+  // authMiddleware,
   commentController.deleteComment
 );
 
