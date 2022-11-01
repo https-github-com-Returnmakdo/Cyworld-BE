@@ -8,11 +8,6 @@ module.exports = (req, res, next) => {
         errorMessage: '이미 로그인이 되어있습니다.',
       });
     }
-
-    if (!req.header.auth) {
-      return next();
-    }
-
     next();
   } catch (error) {
     console.trace(error);

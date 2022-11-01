@@ -46,7 +46,7 @@ module.exports = async (req, res, next) => {
       const user = await Users.findByPk(userId);
 
       res.cookie('accessToken', newAccessToken);
-      console.log('토근 재발급');
+      console.log('토큰 재발급 되었습니다');
 
       res.locals.user = user;
     } else {

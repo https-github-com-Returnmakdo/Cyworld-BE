@@ -4,20 +4,20 @@ class CommentController {
   commentController = new CommentService();
 
   getComment = async (req, res) => {
-    const { diaryId } = req.params;
-    const comments = await this.commentController.findAllComment(diaryId);
+    const { userId } = req.params;
+    const comments = await this.commentController.findAllComment(userId);
     res.status(200).json({ data: comments });
   };
 
   createComment = async (req, res) => {
-    const { diaryId } = req.params;
-    const { userId } = res.locals.user;
+    const { diaryId, userId } = req.params;
+    // const { name } = res.locals.user;
     const { comment } = req.body;
-    console.log(res.locals.user);
 
     const createCommentData = await this.commentController.createComment(
       diaryId,
       userId,
+      // name,
       comment
     );
     res.status(200).json({ data: createCommentData });

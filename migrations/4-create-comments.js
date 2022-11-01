@@ -15,7 +15,7 @@ module.exports = {
       },
       userId: {
         type: Sequelize.DataTypes.INTEGER,
-        allowNull: false,
+        allowNull: true,
         references: {
           model: 'Users',
           key: 'userId',
@@ -24,12 +24,7 @@ module.exports = {
       },
       name: {
         type: Sequelize.DataTypes.STRING,
-        allowNull: false,
-        // references: {
-        //   model: 'Users',
-        //   key: 'name',
-        // },
-        // onDelete: 'cascade',
+        allowNull: true,
       },
       comment: {
         type: Sequelize.DataTypes.STRING,
