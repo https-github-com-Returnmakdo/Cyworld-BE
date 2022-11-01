@@ -9,16 +9,17 @@ class UsersService {
   createUser = async (users) => {
     const { email, name, password, gender, birth } = users;
 
-    let isGender;
+    // let isGender;
 
-    if (gender === '남자') isGender = 'man';
-    else isGender = 'lady';
+    // if (gender === '남자') isGender = 'man';
+    // else isGender = 'lady';
 
     await this.usersRepositories.createUser({
       email: email + '@cyworld.com',
       name: name,
       password: password,
-      gender: `https://qportminiprojectmini.s3.ap-northeast-2.amazonaws.com/sample/${isGender}.png`,
+      // gender: `https://qportminiprojectmini.s3.ap-northeast-2.amazonaws.com/sample/${isGender}.png`,
+      gender: gender,
       birth: birth,
     });
   };
@@ -144,5 +145,29 @@ class UsersService {
       intro: introupdate.intro,
     };
   };
-}
+
+  adminId = async(userId)=>{
+    await this.usersRepositories.adminId(userId)
+  }
+  
+  findAdmin = async (userId) => {
+    const findAdmin = await this.usersRepositories.findAdmin(userId);
+    if (findAdmin === 1) {
+      return ("관리자 확인완료");
+      }else {
+        throw new Error("권한이 없습니다");
+      }
+  }
+
+  //도토리
+  dotori = async (userId,dotori) => {
+      await this.usersRepositories.updotori(userId,dotori);
+      if (dotori)
+      {
+        return;
+      } else {
+        throw new Error("해당정보의 유저가 없습니다.");
+      }
+  };
+  }
 module.exports = UsersService;
