@@ -22,7 +22,7 @@ class IlchonpyungsService {
 
     // 본인의 미니홈피에 일촌평 작성시 예외처리
     if (+userId === user.userId)
-      throw new Error('내 미니홈피에는 일촌평 작성이 불가합니다.');
+      throw new Error('본인 미니홈피에는 작성이 불가합니다.');
 
     // 두 개 이상의 일촌평 작성 시도시 예외처리
     const existBest = await this.ilchonpyungsRepository.findByWriter(
