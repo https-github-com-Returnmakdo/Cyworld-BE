@@ -1,9 +1,9 @@
 const { Comments } = require('../models');
 
 class CommentRepository {
-  findAllComment = async (diaryId) => {
+  findAllComment = async (userId) => {
     const comments = Comments.findAll(
-      { where: { diaryId } },
+      { where: { userId } },
       { order: [['createdAt', 'DESC']] }
     );
     return comments;
@@ -13,6 +13,7 @@ class CommentRepository {
     const createCommentData = await Comments.create({
       diaryId,
       userId,
+      // name,
       comment,
     });
     return createCommentData;

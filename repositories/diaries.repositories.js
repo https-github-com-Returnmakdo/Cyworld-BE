@@ -7,10 +7,10 @@ class DiaryRepository {
     return diaries;
   };
 
-  createDiary = async (userId, name, dirImg, content, diaryNo) => {
+  createDiary = async (userId, dirImg, content, diaryNo) => {
     const createDiaryData = await Diaries.create({
       userId,
-      name,
+      // name,
       dirImg,
       content,
       diaryNo,
@@ -18,12 +18,13 @@ class DiaryRepository {
     return createDiaryData;
   };
 
-  updateDiary = async (diaryId, dirImg, userId, content) => {
+  updateDiary = async (diaryId, dirImg, content) => {
     const updateDiaryData = await Diaries.update(
-      { content: content, dirImg: dirImg },
-      { where: { diaryId, userId } }
+      { content, dirImg },
+      { where: { diaryId } }
     );
-    return updateDiaryData;
+
+    return await Diaries.findOne({ where: { diaryId } });
   };
 
   deleteDiary = async (diaryId) => {
