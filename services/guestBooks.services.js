@@ -32,7 +32,15 @@ class GuestBooksService {
   // userId에 해당하는 미니홈피 방명록 목록 조회
   getBooks = async (req, res, next) => {
     const { userId } = req.params;
-    return await this.guestBooksRepository.getBooks(userId);
+    const books = await this.guestBooksRepository.getBooks(userId);
+    // console.log((books[0].dataValues.guestBookId));
+    for (let i = 0; i < books.length; i++) {
+      books[i].dataValues.guestBookNum = i + 1;
+    }
+
+    return books.sort(
+      (a, b) => b.dataValues.guestBookNum - a.dataValues.guestBookNum
+    );
   };
 
   // 방명록 수정
