@@ -41,10 +41,6 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING,
         allowNull: true,
       },
-      diaryNo: {
-        type: DataTypes.STRING,
-        allowNull: false,
-      },
     },
     {
       sequelize,
