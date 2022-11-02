@@ -28,6 +28,8 @@ class DiaryRepository {
   };
 
   deleteDiary = async (diaryId) => {
+    const deleteDiaryImg = await Diaries.findOne({ where: { diaryId } });
+
     const deleteDiaryData = await Diaries.destroy({ where: { diaryId } });
     return deleteDiaryData;
   };

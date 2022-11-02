@@ -9,22 +9,23 @@ class CommentRepository {
     return comments;
   };
 
-  createComment = async (diaryId, userId, comment) => {
+  createComment = async (diaryId, userId, name, comment) => {
     const createCommentData = await Comments.create({
       diaryId,
       userId,
-      // name,
+      name,
       comment,
     });
     return createCommentData;
   };
 
-  updateComment = async (commentId, userId, comment) => {
+  updateComment = async (commentId, comment) => {
     const updateCommentData = await Comments.update(
-      { comment: comment },
-      { where: { commentId, userId } }
+      { comment },
+      { where: { commentId } }
     );
-    return updateCommentData;
+
+    return await Comments.findOne({ where: { commentId } });
   };
 
   deleteComment = async (commentId, userId) => {
