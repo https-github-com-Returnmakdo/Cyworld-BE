@@ -1,4 +1,4 @@
-const { Users, MyHomeCounts } = require('../models');
+const { Users, MyHomeCounts, Coupons } = require('../models');
 const { Op } = require('sequelize');
 class UsersRepositories {
   createUser = async (user) => {
@@ -74,8 +74,23 @@ class UsersRepositories {
     return introupdate;
   };
 
-  updotori = async(userId,dotori)=>{
-    return await Users.update({dotori:dotori},{where:{userId}});
-  }
-};
+  // chargeDotori = async (userId, price) => {
+  //   return await Users.update({ dotori: price / 100 }, { where: { userId } });
+  // };
+
+  // findCoupon = async (coupon) => {
+  //   return await Coupons.findOne({
+  //     where: { coupon },
+  //   });
+  // };
+
+  // afterCoupon = async (couponId) => {
+  //   await Coupons.update(
+  //     { status: 'x' },
+  //     {
+  //       where: { couponId },
+  //     }
+  //   );
+  // };
+}
 module.exports = UsersRepositories;
