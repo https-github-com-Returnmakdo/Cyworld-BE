@@ -24,7 +24,7 @@ router.put(
 router.delete(
   '/:diaryId/:userId',
   authMiddleware, //나중에 다시 수정
-  // upload.delete_file('dirImg'),
+  upload.delete_file,
   diaryController.deleteDiary
 ); // 다이어리 삭제
 

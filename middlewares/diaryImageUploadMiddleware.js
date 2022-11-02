@@ -28,9 +28,11 @@ class S3ImageController {
     const { diaryId } = req.params;
     const imgName = await Diaries.findOne({ where: { diaryId } });
 
+    const s3ImgName = imgName.dirImg.split('/').pop()
+
     let params = {
       Bucket: 'cyworld07', //버켓 이름
-      Key: `${imgName.dirImg}`,
+      Key: s3ImgName,
     };
 
     try {
