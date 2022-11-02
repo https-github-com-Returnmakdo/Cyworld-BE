@@ -34,5 +34,9 @@ class CommentRepository {
     });
     return deleteCommentData;
   };
+
+  findByComment = async (commentId) => {
+    return await Comments.findByPk(commentId);
+  };
 }
 module.exports = CommentRepository;

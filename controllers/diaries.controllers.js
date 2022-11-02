@@ -12,7 +12,7 @@ class DiaryController {
 
   createDiary = async (req, res) => {
     const { userId } = req.params;
-    const { content, diaryNo } = req.body;
+    const { content } = req.body;
     const { name } = res.locals.user;
     const userInfo = res.locals.user;
 
@@ -31,13 +31,7 @@ class DiaryController {
         ? process.env.S3_STORAGE_URL + imageFileName
         : null;
 
-      const createDiaryData = await this.diaryController.createDiary(
-        userId,
-        // name,
-        dirImg,
-        content,
-        diaryNo
-      );
+      await this.diaryController.createDiary(userId, name, dirImg, content);
       res.status(200).json({ msg: '다이어리 작성완료!' });
     } catch (err) {
       res.status(400).json({ err: err.message });

@@ -29,10 +29,6 @@ module.exports = {
         type: Sequelize.DataTypes.STRING,
         allowNull: true,
       },
-      diaryNo: {
-        type: Sequelize.DataTypes.STRING,
-        allowNull: false,
-      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,

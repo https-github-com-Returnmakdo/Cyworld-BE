@@ -38,6 +38,10 @@ class CommentService {
     );
     return deleteCommentData;
   };
+
+  findByComment = async (commentId)=>{
+    return await this.commentService.findByComment(commentId)
+  }
 }
 
 module.exports = CommentService;

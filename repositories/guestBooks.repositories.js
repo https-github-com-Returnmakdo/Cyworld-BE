@@ -22,12 +22,12 @@ class GuestBooksRepository {
     return await this.Guestbooks.findByPk(guestbookId);
   };
 
-  updateBook = async (guestbook, guestbookId) => {
-    await this.Guestbooks.update(
-      { guestBook: guestbook },
-      { where: { guestbookId } }
-    );
-  };
+  // updateBook = async (guestbook, guestbookId) => {
+  //   await this.Guestbooks.update(
+  //     { guestBook: guestbook },
+  //     { where: { guestbookId } }
+  //   );
+  // };
 
   deleteBook = async (guestbookId) => {
     await this.Guestbooks.destroy({

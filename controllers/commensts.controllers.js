@@ -25,11 +25,12 @@ class CommentController {
 
   updataComment = async (req, res) => {
     const { commentId } = req.params;
-    const { userId, name } = res.locals.user;
+    const { userId } = res.locals.user;
     const { comment } = req.body;
-    const userInfo = res.locals.user;
     try {
-      if (userId !== userInfo.userId) {
+      const isWriter = await this.commentController.findByComment(commentId);
+
+      if (userId !== isWriter.userId) {
         throw new Error('수정 권한이 없습니다.');
       }
       const updateCommentData = await this.commentController.updateComment(
@@ -44,17 +45,18 @@ class CommentController {
 
   deleteComment = async (req, res) => {
     const { commentId } = req.params;
-    const { userId, name } = res.locals.user;
-    const userInfo = res.locals.user;
+    const { userId } = res.locals.user;
     try {
-      if (userId !== userInfo.userId) {
-        throw new Error('수정 권한이 없습니다.');
+      const isWriter = await this.commentController.findByComment(commentId);
+
+      if (userId !== isWriter.userId) {
+        throw new Error('삭제 권한이 없습니다.');
       }
       const deleteCommentData = await this.commentController.deleteComment(
         commentId,
         userId
       );
-      res.status(200).json({ data: deleteCommentData });
+      res.status(200).json({msg:"삭제되었습니다." ,data: deleteCommentData });
     } catch (err) {
       res.status(400).json({ err: err.message });
     }
