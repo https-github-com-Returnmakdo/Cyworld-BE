@@ -5,6 +5,7 @@ class GuestBooksController {
 
   // 방명록 작성
   createBook = async (req, res, next) => {
+    console.log(req.body?.bookImage);
     try {
       await this.guestBooksService.createBook(req, res);
       res.status(200).send({ msg: '방명록이 작성되었습니다.' });
@@ -24,14 +25,14 @@ class GuestBooksController {
   };
 
   // 방명록 수정
-  updateBook = async (req, res, next) => {
-    try {
-      await this.guestBooksService.updateBook(req, res);
-      res.status(200).send({ msg: '방명록이 수정되었습니다.' });
-    } catch (error) {
-      res.status(error.status || 400).send({ ok: false, msg: error.message });
-    }
-  };
+  // updateBook = async (req, res, next) => {
+  //   try {
+  //     await this.guestBooksService.updateBook(req, res);
+  //     res.status(200).send({ msg: '방명록이 수정되었습니다.' });
+  //   } catch (error) {
+  //     res.status(error.status || 400).send({ ok: false, msg: error.message });
+  //   }
+  // };
 
   // 방명록 삭제
   deleteBook = async (req, res, next) => {

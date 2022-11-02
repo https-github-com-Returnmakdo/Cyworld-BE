@@ -8,43 +8,31 @@ class DiaryService {
     // 저장소에서 데이터요청
     const allDiary = await this.diaryService.findAllDiary(userId);
 
+    for (let i = 0; i < allDiary.length; i++) {
+      allDiary[i].dataValues.diaryNo = i + 1;
+    }
+
     // 호출한 Diary들 중 가장 최근 게시글순으로 정렬
-    allDiary.sort((a, b) => {
-      return b.createdAt - a.createdAt;
+    return allDiary.sort((a, b) => {
+      return b.dataValues.diaryNo - a.dataValues.diaryNo;
     });
 
     // 사용자에게 보여줄 데이터를 가공
-    return allDiary.map((diary) => {
-      return {
-        diaryId: diary.diaryId,
-        userId: diary.userId,
-        dirImg: diary.dirImg,
-        content: diary.content,
-        diaryNo: diary.diaryNo,
-        createdAt: diary.createdAt,
-        updatedAt: diary.updatedAt,
-      };
-    });
+    // return allDiary.map((diary) => {
+    //   return {
+    //     diaryId: diary.diaryId,
+    //     userId: diary.userId,
+    //     dirImg: diary.dirImg,
+    //     content: diary.content,
+    //     diaryNo: diary.diaryNo,
+    //     createdAt: diary.createdAt,
+    //     updatedAt: diary.updatedAt,
+    //   };
+    // });
   };
 
-  createDiary = async (userId, dirImg, content, diaryNo) => {
-    const createDiaryData = await this.diaryService.createDiary(
-      userId,
-      // name,
-      dirImg,
-      content,
-      diaryNo
-    );
-
-    return {
-      diaryId: createDiaryData.diaryId,
-      userId: createDiaryData.userId,
-      // name: createDiaryData.name,
-      dirImg: createDiaryData.dirImg,
-      content: createDiaryData.content,
-      diaryNo: createDiaryData.diaryNo,
-      createdAt: createDiaryData.createdAt,
-    };
+  createDiary = async (userId, name, dirImg, content) => {
+    return await this.diaryService.createDiary(userId, name, dirImg, content);
   };
 
   updateDiary = async (diaryId, dirImg, content) => {

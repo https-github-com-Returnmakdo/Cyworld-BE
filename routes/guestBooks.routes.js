@@ -10,7 +10,7 @@ router
    * PUT : 해당 미니홈피의 방명록 수정,
    * DELETE : 해당 미니홈피의 방명록 삭제
    */
-  .put(auth, guestBooksController.updateBook)
+  // .put(auth, guestBooksController.updateBook)
   .delete(auth, guestBooksController.deleteBook);
 
 router
