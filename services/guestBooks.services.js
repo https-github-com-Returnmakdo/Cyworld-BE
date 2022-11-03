@@ -5,7 +5,7 @@ class GuestBooksService {
 
   // 방명록 작성
   createBook = async (req, res, next) => {
-    const { guestbook } = req.body;
+    const { guestbook, bookImage } = req.body;
     const { userId } = req.params;
     const { user } = res.locals;
 
@@ -26,6 +26,7 @@ class GuestBooksService {
       name: user.name,
       userId,
       guestBook: guestbook,
+      bookImage,
     });
   };
 
