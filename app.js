@@ -25,7 +25,7 @@ const https = HTTPS.createServer(app);
 const router = require('./routes');
 const port = process.env.EXPRESS_PORT || 3000;
 let corsOptions = {
-  origin: ['http://localhost:3000', 'https://cyworld-client.vercel.app'],
+  origin: process.env.FRONT_END_URL,
   credentials: true,
 };
 
