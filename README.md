@@ -1,5 +1,5 @@
 ![메인 소개 이미지](https://qportminiprojectmini.s3.ap-northeast-2.amazonaws.com/sample/%EC%8B%B8%EC%9D%B4%EC%9B%94%EB%93%9C+%EB%A9%94%EC%9D%B8.png)
-
+![미니홈피](https://qportminiprojectmini.s3.ap-northeast-2.amazonaws.com/sample/cyword+myhomp.png)
 ---------------------------
 
 # ✨Cyworld (추억의 싸이월드)
