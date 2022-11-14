@@ -12,6 +12,7 @@ class CommentController {
   createComment = async (req, res) => {
     const { diaryId, userId } = req.params;
     const { name } = res.locals.user;
+    console.log(name);
     const { comment } = req.body;
 
     const createCommentData = await this.commentController.createComment(
@@ -56,7 +57,7 @@ class CommentController {
         commentId,
         userId
       );
-      res.status(200).json({msg:"삭제되었습니다." ,data: deleteCommentData });
+      res.status(200).json({ msg: '삭제되었습니다.', data: deleteCommentData });
     } catch (err) {
       res.status(400).json({ err: err.message });
     }
