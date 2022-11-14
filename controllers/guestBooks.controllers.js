@@ -5,7 +5,6 @@ class GuestBooksController {
 
   // 방명록 작성
   createBook = async (req, res, next) => {
-    console.log(req.body?.bookImage);
     try {
       await this.guestBooksService.createBook(req, res);
       res.status(200).send({ msg: '방명록이 작성되었습니다.' });

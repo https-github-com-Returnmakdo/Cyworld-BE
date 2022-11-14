@@ -7,7 +7,7 @@ class S3ImageController {
   upload = multer({
     storage: multerS3({
       s3: s3,
-      bucket: 'cyworld07', //버켓 이름
+      bucket: 'great', //버켓 이름
       acl: 'public-read', //접근 권한
       contentType: multerS3.AUTO_CONTENT_TYPE,
       shouldTransform: true,
@@ -31,7 +31,7 @@ class S3ImageController {
     const s3ImgName = imgName.dirImg.split('/').pop()
 
     let params = {
-      Bucket: 'cyworld07', //버켓 이름
+      Bucket: 'qportminiprojectmini', //버켓 이름
       Key: s3ImgName,
     };
 

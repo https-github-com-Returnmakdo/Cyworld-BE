@@ -60,6 +60,7 @@ class UsersController {
   login = async (req, res, next) => {
     try {
       const { email, password } = await Joi.loginSchema.validateAsync(req.body);
+      console.log(req.body)
       const user = await this.usersService.userLogin(email, password);
       res.cookie('accesstoken', user.accesstoken);
       res.cookie('refreshtoken', user.refreshtoken);
